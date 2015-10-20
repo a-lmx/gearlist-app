@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# reading APIs
+gem 'httparty'
 # styling
 gem 'bootstrap-sass'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
