@@ -14,7 +14,7 @@
     <%= f.text_area :description, class: 'form-control' %>
   </div>
 
-    <%= hidden_field_tag :user_id, @user_id %>
+    <%= f.hidden_field :user_id, value: @user_id %>
 
     <%= f.submit 'Create Gear List', class: 'btn btn-default' %>
 <% end %>
