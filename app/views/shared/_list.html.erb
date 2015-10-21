@@ -1,7 +1,7 @@
 <div class="panel panel-default" >
-  <div class="panel-heading"><%= @list["name"] %></div>
+  <div class="panel-heading"><%= @list[:name] %></div>
   <div class="panel-body">
-    <%= @list["description"] %>
+    <%= @list[:description] %>
   </div>
   <table class="table">
     <thead>
@@ -13,10 +13,10 @@
         <th>Weight (gms)</th>
       </tr>
     </thead>
-    <% @sections.each do |section| %>
-      <% section["list_items"].each do |item| %>
+    <% @list[:sections].each do |section| %>
+      <% section[:items].each do |item| %>
         <tr>
-          <td><%= item["section"] %></td>
+          <td><%= section["name"] %></td>
           <td><%= item["category"] %></td>
           <td><%= item["name"] %></td>
           <td><%= item["quantity"] %></td>
@@ -26,9 +26,9 @@
       <tr>
         <td></td>
         <td></td>
-        <th><%= section["name"].capitalize %> subtotal:</th>
+        <th>Subtotal for <%= section["name"].capitalize %>:</th>
         <td></td>
-        <th></th>            
+        <th><%= section[:subtotal] %></th>            
       </tr>
     <% end %>
     <tfoot> 
@@ -37,7 +37,7 @@
         <td></td>
         <th>Total Weight:</th>
         <td></td>
-        <th></th>
+        <th><%= @list[:total_weight] %></th>
       </tr>
     </tfoot>
   </table>
