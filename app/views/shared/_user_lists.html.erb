@@ -1,0 +1,5 @@
+<div class="list-group">
+  <% @user_lists.each do |list| %>
+    <%= link_to "#{list["name"]}", list_path(list["id"]), class: "list-group-item" %>
+  <% end %>
+</div>
