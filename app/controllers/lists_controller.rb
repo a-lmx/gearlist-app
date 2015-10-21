@@ -14,8 +14,20 @@ class ListsController < ApplicationController
   end
 
   def create
-    raise
-    # create hash to send to API here
+    url = ApplicationController::BASE_URI + '/lists'
+    options = {
+      body: {
+        list: list_params
+      }
+    }
+    response = HTTParty.post(url, options)
+    message = response.parsed_response
+    # raise
+    if message["message"]["success"]
+      redirect_to root_path
+    else
+      redirect_to new_list_path
+    end
   end
 
   private
@@ -91,5 +103,9 @@ class ListsController < ApplicationController
     end
 
     return sum
+  end
+
+  def list_params
+    params.require(:list).permit(:user_id, :name, :description)
   end
 end
