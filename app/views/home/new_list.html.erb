@@ -4,3 +4,10 @@
 
 <h3>Create a Gear List</h3>
 
+<%= form_tag({ controller: 'home', action: 'create_list'}, method: 'post', role: 'form', class: 'form') do %>
+  <div class="form-group">
+    <%= label_tag(:name, 'List Name:') %>
+    <%= text_field_tag(:name, class: 'form-control') %>
+    <%= submit_tag 'Create Gear List', class: 'btn btn-default' %>
+  </div>
+<% end %>
