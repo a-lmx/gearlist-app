@@ -1,9 +1,10 @@
 class HomeController < ApplicationController
+  before_action :user_lists
+
   BASE_URI = 'http://localhost:3000/api/v1'
 
   def index
     @lists = get_lists
-    # @list = build_list(3)
   end
 
   def show
@@ -81,6 +82,16 @@ class HomeController < ApplicationController
     end
 
     return sum
+  end
+
+  def user_lists
+    @user_lists ||= get_user_lists(1)
+  end
+
+  def get_user_lists(user_id)
+    url = BASE_URI + '/users/' + user_id.to_s + '/lists'
+    response = HTTParty.get(url)
+    return response.parsed_response
   end
 end
 
