@@ -5,4 +5,4 @@
 
 <%= render partial: 'shared/list', locals: { list: @list } %>
 
-<%= link_to 'Add Items', list_items_path(@list), class: 'btn btn-default' %>
+<%= link_to 'Add Items', list_items_path(params[:id]), class: 'btn btn-default' %>
