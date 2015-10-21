@@ -3,26 +3,7 @@ class HomeController < ApplicationController
 
   def index
     @list = build_list(3)
-    raise
   end
-
-  # def list_details(list_id)
-  #   url = 'http://localhost:3000/api/v1/lists/' + list_id.to_s
-  #   response = HTTParty.get(url)
-  #   return response.parsed_response
-  # end
-
-  # def list_items(list_id)
-  #   url = 'http://localhost:3000/api/v1/lists/' + list_id.to_s + '/items_by_section'
-  #   response = HTTParty.get(url)
-  #   return response.parsed_response
-  # end
-
-  # def sections(list_id)
-  #   url = 'http://localhost:3000/api/v1/lists/' + list_id.to_s + '/sections'
-  #   response = HTTParty.get(url)
-  #   return response.parsed_response
-  # end
 
   def build_list(list_id)
     list = {}
@@ -35,7 +16,10 @@ class HomeController < ApplicationController
 
     list[:sections].each do |section|
       section[:items] = get_section_items(section["id"])
+      section[:subtotal] = weight_subtotal(section)
     end
+
+    list[:total_weight] = total_weight(list)
 
     return list
   end
@@ -56,6 +40,24 @@ class HomeController < ApplicationController
     url = BASE_URI + '/list-sections/' + section_id.to_s + '/items'
     response = HTTParty.get(url)
     return response.parsed_response
+  end
+
+  def weight_subtotal(section)
+    sum = 0
+    section[:items].each do |item|
+      sum += (item["weight"].to_i * item["quantity"].to_i)
+    end
+
+    return sum
+  end
+
+  def total_weight(list)
+    sum = 0
+    list[:sections].each do |section|
+      sum += section[:subtotal]
+    end
+
+    return sum
   end
 end
 
