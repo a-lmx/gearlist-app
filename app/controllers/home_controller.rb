@@ -6,6 +6,10 @@ class HomeController < ApplicationController
     # @list = build_list(3)
   end
 
+  def show
+    @list = build_list(params[:id])
+  end
+
   def build_list(list_id)
     list = {}
 
