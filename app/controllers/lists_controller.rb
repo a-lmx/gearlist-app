@@ -21,11 +21,11 @@ class ListsController < ApplicationController
       }
     }
     response = HTTParty.post(url, options)
-    message = response.parsed_response
-    
-    if message["success"]
-      redirect_to root_path
-      # redirect_to list_path(list_id)
+    contents = response.parsed_response
+
+    if contents["success"]
+      list_id = contents["list_id"]
+      redirect_to list_path(list_id)
     else
       redirect_to new_list_path
     end    
