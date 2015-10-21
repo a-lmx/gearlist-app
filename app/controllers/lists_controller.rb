@@ -1,6 +1,4 @@
 class ListsController < ApplicationController
-  before_action :user_lists
-
   def index
     @lists = get_lists
   end
