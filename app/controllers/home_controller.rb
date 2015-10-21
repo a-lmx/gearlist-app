@@ -84,8 +84,10 @@ class HomeController < ApplicationController
     return sum
   end
 
+  # TODO: have this be wiped out when user logs out
+  # or maybe just make a new call each time -> you'd want it to update when a new list is created
   def user_lists
-    @user_lists ||= get_user_lists(1)
+    @user_lists ||= get_user_lists(1) # TODO: change this hardcoded user_id!!!
   end
 
   def get_user_lists(user_id)
