@@ -11,6 +11,12 @@ class HomeController < ApplicationController
     @list = build_list(params[:id])
   end
 
+  def new_list
+    render :new_list
+  end
+
+  private
+
   def build_list(list_id)
     list = {}
 
