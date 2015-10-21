@@ -2,7 +2,8 @@ class HomeController < ApplicationController
   BASE_URI = 'http://localhost:3000/api/v1'
 
   def index
-    @list = build_list(3)
+    @lists = get_lists
+    # @list = build_list(3)
   end
 
   def build_list(list_id)
@@ -22,6 +23,24 @@ class HomeController < ApplicationController
     list[:total_weight] = total_weight(list)
 
     return list
+  end
+
+  def get_lists
+    list_ids = []
+    lists = []
+
+    url = BASE_URI + '/lists'
+    retrieved_lists = HTTParty.get(url).parsed_response
+
+    retrieved_lists.each do |list|
+      list_ids.push(list["id"])
+    end
+
+    list_ids.each do |id|
+      lists.push(build_list(id))
+    end
+
+    return lists
   end
 
   def get_list_details(list_id)
