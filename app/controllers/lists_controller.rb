@@ -9,11 +9,12 @@ class ListsController < ApplicationController
 
   def new
     @list = List.new
+    @user_id = ApplicationController::DEFAULT_USER_ID
     render :new
   end
 
   def create
-    @user_id = ApplicatonController::DEFAULT_USER_ID
+    raise
     # create hash to send to API here
   end
 
