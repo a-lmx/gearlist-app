@@ -17,10 +17,11 @@ class ItemsController < ApplicationController
           category: item["category"]
         },
         section: item["section"],
+        quantity: item["quantity"],
         list_id: list_id
       }
     }
-    raise
+    # raise
     response = HTTParty.post(url, options)
     # contents = response.parsed_response
 
