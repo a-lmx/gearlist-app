@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
 
   def create
     list_id = params["item"]["list_id"]
-    url = ApplicationController::BASE_URI + '/lists/'+ list_id + '/add_items'
+    url = ApplicationController::BASE_URI + '/lists/'+ list_id + '/items'
     options = {
       body: {
         item: item_params
