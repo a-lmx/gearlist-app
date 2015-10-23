@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :user_lists
+  skip_before_action :user_lists, :current_user_id, :require_signin
 
   def new
     render :new
