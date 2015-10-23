@@ -12,4 +12,12 @@ class SessionsController < ApplicationController
     render  json: { success: "You set the session user_id and token." }, 
             status: 200
   end
+
+  def destroy
+    session[:user_id] = nil
+    session[:token] = nil
+
+    # flash message here - Thanks for using Penguin Gear Lists!
+    redirect_to login_path
+  end
 end
