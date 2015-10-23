@@ -9,7 +9,7 @@ class ListsController < ApplicationController
 
   def new
     @list = List.new
-    @user_id = ApplicationController::DEFAULT_USER_ID
+    @user_id = session[:user_id]
     render :new
   end
 
