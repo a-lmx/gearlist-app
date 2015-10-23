@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :user_lists
+
   def new
     render :new
   end
