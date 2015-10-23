@@ -1,0 +1,94 @@
+<!-- Add a button for the user to click to initiate auth sequence -->
+<div id="content">
+  <button id="authorize-button" style="visibility: hidden">Log in with Google</button>
+</div>
+
+<p><%=  %></p>
+
+<script type="text/javascript">
+
+  var clientId = "<%= ENV['GOOGLE_CLIENT_ID'] %>";
+
+  var apiKey = "<%= ENV['GOOGLE_API_KEY'] %>";
+
+  var scopes = 'https://www.googleapis.com/auth/plus.me';
+
+  function handleClientLoad() {
+    // Step 2: Reference the API key
+    gapi.client.setApiKey(apiKey);
+    window.setTimeout(checkAuth,1);
+  }
+
+  function checkAuth() {
+    gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true}, handleAuthResult);
+  }
+
+  function handleAuthResult(authResult) {
+    var authorizeButton = document.getElementById('authorize-button');
+    if (authResult && !authResult.error) {
+      authorizeButton.style.visibility = 'hidden';
+      makeApiCall();
+    } else {
+      authorizeButton.style.visibility = '';
+      authorizeButton.onclick = handleAuthClick;
+    }
+  }
+
+  function handleAuthClick(event) {
+    // Step 3: get authorization to use private data
+    gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthResult);
+    return false;
+  }
+
+  // Load the API and make an API call.  Display the results on the screen.
+  function makeApiCall() {
+    // Step 4: Load the Google+ API
+    gapi.client.load('plus', 'v1').then(function() {
+      // Step 5: Assemble the API request
+      var request = gapi.client.plus.people.get({
+        'userId': 'me'
+      });
+      // Step 6: Execute the API request
+      request.then(function(resp) {
+        // capture id (uid), name
+        var userObject = {
+          id: resp.result.id,
+          name: resp.result.displayName,
+          provider: "google_oauth2"
+        };
+        // pass it to the back end in a post request
+        loginUser(userObject);
+      }, function(reason) {
+        // trigger UI message "Unable to log in. Please try again."
+        console.log('Error: ' + reason.result.error.message);
+      });
+    });
+  }
+
+  function loginUser(userDetails) {
+    var url = 'http://localhost:3000/api/v1/login'
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: userDetails,
+      success: function(data, textStatus, jqHXR) {
+        processUserToken(data);
+      }
+    });
+  };
+
+  function processUserToken(data) {
+    var url = '/login';
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: { token: data.token, userId: data.userId },
+      success: function(data, textStatus, jqHXR) {
+        window.location.replace("/");
+      }
+    });
+  };
+</script>
+
+ <!-- Step 1: Load JavaScript client library -->
+<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
