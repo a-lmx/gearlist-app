@@ -9,20 +9,21 @@ class ItemsController < ApplicationController
     list_id = params["list_id"]
     item = params["item"]
     url = ApplicationController::BASE_URI + '/lists/'+ list_id + '/items'
-    options = {
-      body: {
-        item: {
-          name: item["name"],
-          weight: item["weight"],
-          category: item["category"]
-        },
-        section: item["section"],
-        quantity: item["quantity"],
-        list_id: list_id
-      }
+    body_contents = {
+      item: {
+        name: item["name"],
+        weight: item["weight"],
+        category: item["category"]
+      },
+      section: item["section"],
+      quantity: item["quantity"],
+      list_id: list_id
     }
-    # raise
-    response = HTTParty.post(url, options)
+    response = HTTParty.post(
+      url, 
+      body: body_contents,
+      headers: auth_header
+    )
     # contents = response.parsed_response
 
     # if contents["success"]

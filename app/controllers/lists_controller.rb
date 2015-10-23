@@ -15,12 +15,9 @@ class ListsController < ApplicationController
 
   def create
     url = ApplicationController::BASE_URI + '/lists'
-    options = {
-      body: {
-        list: list_params
-      }
-    }
-    response = HTTParty.post(url, options)
+
+    body_contents = { list: list_params }
+    response = HTTParty.post(url, body: body_contents, headers: auth_header)
     contents = response.parsed_response
 
     if contents["success"]
@@ -57,7 +54,7 @@ class ListsController < ApplicationController
     lists = []
 
     url = ApplicationController::BASE_URI + '/lists'
-    retrieved_lists = HTTParty.get(url).parsed_response
+    retrieved_lists = HTTParty.get(url, headers: auth_header).parsed_response
 
     retrieved_lists.each do |list|
       list_ids.push(list["id"])
@@ -72,19 +69,19 @@ class ListsController < ApplicationController
 
   def get_list_details(list_id)
     url = ApplicationController::BASE_URI + '/lists/' + list_id.to_s
-    response = HTTParty.get(url)
+    response = HTTParty.get(url, headers: auth_header)
     return response.parsed_response
   end
 
   def get_list_sections(list_id)
     url = ApplicationController::BASE_URI + '/lists/' + list_id.to_s + '/sections'
-    response = HTTParty.get(url)
+    response = HTTParty.get(url, headers: auth_header)
     return response.parsed_response
   end
 
   def get_section_items(section_id)
     url = ApplicationController::BASE_URI + '/list-sections/' + section_id.to_s + '/items'
-    response = HTTParty.get(url)
+    response = HTTParty.get(url, headers: auth_header)
     return response.parsed_response
   end
 
