@@ -50,28 +50,44 @@
       });
       // Step 6: Execute the API request
       request.then(function(resp) {
-        var heading = document.createElement('h4');
-        var image = document.createElement('img');
-        image.src = resp.result.image.url;
-        heading.appendChild(image);
-        heading.appendChild(document.createTextNode(resp.result.displayName));
-        document.getElementById('content').appendChild(heading);
-
-        // make post request to backend here -- it will be synchronous
-        // write talkToBackend function, in ajax success handler, do window redirect to '/'
-
         // capture id (uid), name
-        // pass it to the back end in a post request, with google as provider
-        // get backend user_id corresponding to that provider & uid
-        // -> create_or_find user record
-        // -> generate token to be associated with user record (with expiration - 1 day - leave off initial), make field in user model to store token
-        // -> return token to front end in response body (json object)
+        var userObject = {
+          id: resp.result.id,
+          name: resp.result.displayName,
+          provider: "google_oauth2"
+        };
+        // pass it to the back end in a post request
+        loginUser(userObject);
       }, function(reason) {
-        // trigger UI message again "Unable to log in. Please try again."
+        // trigger UI message "Unable to log in. Please try again."
         console.log('Error: ' + reason.result.error.message);
       });
     });
   }
+
+  function loginUser(userDetails) {
+    var url = 'http://localhost:3000/api/v1/login'
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: userDetails,
+      success: function(data, textStatus, jqHXR) {
+        processUserToken(data);
+      }
+    });
+  };
+
+  function processUserToken(data) {
+    var url = '/login';
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: { token: data.token, userId: data.userId },
+      success: function(data, textStatus, jqHXR) {
+        window.location.replace("/");
+      }
+    });
+  };
 </script>
 
  <!-- Step 1: Load JavaScript client library -->
