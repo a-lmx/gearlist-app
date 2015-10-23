@@ -16,7 +16,16 @@ class ApplicationController < ActionController::Base
 
   def get_user_lists(user_id)
     url = BASE_URI + '/users/' + user_id.to_s + '/lists'
-    response = HTTParty.get(url)
+    response = HTTParty.get(url, headers: auth_header)
     return response.parsed_response
+  end
+
+  def auth_header
+    token = session[:token]
+    auth_header = {
+      "Authorization" => "Token token=\"#{token}\""
+    }
+
+    return auth_header
   end
 end
