@@ -5,6 +5,7 @@ class ListsController < ApplicationController
 
   def show
     @list = build_list(params[:id])
+    @list_owner_id = @list[:user_id].to_s
   end
 
   def new
@@ -35,6 +36,7 @@ class ListsController < ApplicationController
 
     details = get_list_details(list_id)
     list[:name]        = details["name"]
+    list[:user_id]     = details["user_id"]
     list[:description] = details["description"]
 
     list[:sections] = get_list_sections(list_id)
