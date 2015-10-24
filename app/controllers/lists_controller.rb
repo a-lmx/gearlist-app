@@ -29,6 +29,17 @@ class ListsController < ApplicationController
     end    
   end
 
+  def edit
+    list_info = get_list_details(params[:id])
+    @list = List.new(
+      name: list_info['name'], 
+      description: list_info['description'], 
+      secret: list_info['secret'],
+      user_id: session['user_id']
+    )
+    render :edit
+  end
+
   private
 
   def build_list(list_id)
