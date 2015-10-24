@@ -1,0 +1,26 @@
+<%= form_for @item, url: url, method: method, role: 'form', class: 'form' do |f| %>
+  <div class="form-group">
+    <%= f.label :section, 'Section:' %>
+    <%= f.text_field :section, placeholder: "packing, shelter \& sleeping, or kitchen...", class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :category, 'Category:' %>
+    <%= f.text_field :category, placeholder: "backpack, sleeping bag, or knife...", class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :name, 'Item:' %>
+    <%= f.text_field :name, placeholder: "eg. ULA Circuit pack, small w/ s-shaped straps", class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :quantity, 'Quantity:' %>
+    <%= f.number_field :quantity, min: 0, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :weight, 'Weight (in gms):' %>
+    <%= f.number_field :weight, min: 0, class: 'form-control' %>
+  </div>
+
+  <%# f.hidden_field :list_id, value: @list_id %>
+
+  <%= f.submit submit_text, class: 'btn btn-default' %>
+<% end %>
