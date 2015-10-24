@@ -35,15 +35,21 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    item_info = get_item_details(params[:id])
-    @item = Item.new(
-      name:       item_info['name'],
-      category:   item_info['category'],
-      weight:     item_info['weight'],
-      quantity:   item_info['quantity'],
-      list_id:    params[:list_id],
-      section:    item_info['section']
-    )
+    list_info = get_list_details(params[:list_id])
+    unless list_info['user_id'] == @current_user_id
+      flash[:errors] = ApplicationController::MESSAGES[:not_yo_list]
+      redirect_to root_path
+    else
+      item_info = get_item_details(params[:id])
+      @item = Item.new(
+        name:       item_info['name'],
+        category:   item_info['category'],
+        weight:     item_info['weight'],
+        quantity:   item_info['quantity'],
+        list_id:    params[:list_id],
+        section:    item_info['section']
+      )
+    end
   end
 
   ### From ListsController
