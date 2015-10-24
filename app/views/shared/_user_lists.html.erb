@@ -1,5 +1,12 @@
 <div class="list-group">
   <% @user_lists.each do |list| %>
-    <%= link_to "#{list["name"]}", list_path(list["id"]), class: "list-group-item" %>
+    <a href="/lists/<%= list["id"] %>" class="list-group-item">
+      <%= list["name"] %>
+      <span class="pull-right">
+        <% if list["secret"] %>
+          <i class="fa fa-lock"></i>
+        <% end %>
+      </span>
+    </a>
   <% end %>
 </div>

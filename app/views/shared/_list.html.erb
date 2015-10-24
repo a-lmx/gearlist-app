@@ -1,5 +1,12 @@
 <div class="panel panel-default" >
-  <div class="panel-heading"><%= list[:name] %></div>
+  <div class="panel-heading">
+    <%= list[:name] %>
+    <span class="pull-right">
+      <% if list[:secret] %>
+        <i class="fa fa-lock"></i>
+      <% end %>
+    </span>
+  </div>
   <div class="panel-body">
     <%= list[:description] %>
   </div>
