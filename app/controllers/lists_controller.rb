@@ -42,7 +42,7 @@ class ListsController < ApplicationController
   def edit
     list_info = get_list_details(params[:id])
 
-    unless list_info['user_id'].to_s == session[:user_id]
+    unless list_info['user_id'].to_s == @current_user_id
       flash[:errors] = MESSAGES[:not_yo_list]
       redirect_to root_path
     end
