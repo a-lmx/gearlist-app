@@ -52,23 +52,48 @@ class ItemsController < ApplicationController
     end
   end
 
+  def update
+    url = ApplicationController::BASE_URI + '/items' + item_params[:id]
+
+    body_contents = {
+      item: {
+        id: item_params['id']
+        name: item_params['name'],
+        weight: item_params['weight'],
+        category: item_params['category']
+      },
+      section: item_params['section'],
+      quantity: item_params['quantity'],
+    }
+    response = HTTParty.put(
+      url, 
+      body: body_contents,
+      headers: auth_header
+    )
+    # contents = response.parsed_response
+
+    # if contents["success"]
+    #   flash message yay
+    # else
+    #   flash message wah
+    # end
+    redirect_to list_path(params[:list_id])
+  end
+
   ### From ListsController
-  # def edit
-  #   list_info = get_list_details(params[:id])
+  # def update
+  #   url = ApplicationController::BASE_URI + '/lists/' + list_params[:id]
 
-  #   unless list_info['user_id'].to_s == session[:user_id]
-  #     flash[:errors] = MESSAGES[:not_yo_list]
-  #     redirect_to root_path
+  #   body_contents = { list: list_params }
+  #   response = HTTParty.put(url, body: body_contents, headers: auth_header)
+  #   contents = response.parsed_response
+
+  #   if contents['success']
+  #     list_id = contents['list_id']
+  #     redirect_to list_path(list_id)
+  #   else
+  #     render :edit
   #   end
-
-  #   @list = List.new(
-  #     name: list_info['name'], 
-  #     description: list_info['description'], 
-  #     secret: list_info['secret'],
-  #     user_id: list_info['user_id'],
-  #     id: params[:id]
-  #   )
-  #   @user_id = session[:user_id]
   # end
 
   private
