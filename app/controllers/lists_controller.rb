@@ -11,7 +11,7 @@ class ListsController < ApplicationController
   def new
     @list = List.new
     @user_id = session[:user_id]
-    @submit_text = "Create Gear List"
+    @submit_text = 'Create Gear List'
     render :new
   end
 
@@ -22,12 +22,12 @@ class ListsController < ApplicationController
     response = HTTParty.post(url, body: body_contents, headers: auth_header)
     contents = response.parsed_response
 
-    if contents["success"]
-      list_id = contents["list_id"]
+    if contents['success']
+      list_id = contents['list_id']
       redirect_to list_path(list_id)
     else
       redirect_to new_list_path
-    end    
+    end
   end
 
   def edit
@@ -36,10 +36,26 @@ class ListsController < ApplicationController
       name: list_info['name'], 
       description: list_info['description'], 
       secret: list_info['secret'],
-      user_id: session['user_id']
+      user_id: session['user_id'],
+      id: params[:id]
     )
-    @submit_text = "Update Gear List"
+    @submit_text = 'Update Gear List'
     render :edit
+  end
+
+  def update
+    url = ApplicationController::BASE_URI + '/lists/' + list_params[:id]
+
+    body_contents = { list: list_params }
+    response = HTTParty.put(url, body: body_contents, headers: auth_header)
+    contents = response.parsed_response
+
+    if contents['success']
+      list_id = contents['list_id']
+      redirect_to list_path(list_id)
+    else
+      redirect_to edit_list_path
+    end
   end
 
   private
@@ -120,6 +136,6 @@ class ListsController < ApplicationController
   end
 
   def list_params
-    params.require(:list).permit(:user_id, :name, :description, :secret)
+    params.require(:list).permit(:id, :user_id, :name, :description, :secret)
   end
 end
