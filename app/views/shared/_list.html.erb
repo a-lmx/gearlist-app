@@ -7,7 +7,7 @@
   </div>
   <div class="panel-body">
     <%= list[:description] %>
-    <% if authorized && params[:action] == 'show' %>
+    <% if authorized? && show? %>
       <%= render partial: 'shared/right_pencil', 
         locals: { url: '/lists/' + params[:id] + '/edit' } %>      
     <% end %>
@@ -20,8 +20,10 @@
         <th>Name</th>
         <th>Quantity</th>
         <th>Weight (gms)</th>
-        <th></th>
-        <th></th>
+        <% if show? %>
+          <th></th>
+          <th></th>
+        <% end %>
       </tr>
     </thead>
     <% list[:sections].each do |section| %>
@@ -32,11 +34,13 @@
           <td><%= item["name"] %></td>
           <td><%= item["quantity"] %></td>
           <td><%= item["weight"] %></td>
-          <td>
-            <%= render partial: 'shared/right_pencil', 
-              locals: { url: '/lists/' + list[:id].to_s + '/items/' + item['id'].to_s + '/edit' } %>
-          </td>
-          <td>Delete</td>
+          <% if show? %>
+            <td>
+                <%= render partial: 'shared/right_pencil', 
+                  locals: { url: '/lists/' + list[:id].to_s + '/items/' + item['id'].to_s + '/edit' } %>
+            </td>
+            <td>Delete</td>
+          <% end %>
         </tr>
       <% end %>
       <tr>
@@ -45,8 +49,10 @@
         <th>Subtotal for <%= section["name"].capitalize %>:</th>
         <td></td>
         <th><%= section[:subtotal] %></th>
-        <th></th>
-        <th></th>
+        <% if show? %>
+          <th></th>
+          <th></th>
+        <% end %>
       </tr>
     <% end %>
     <tfoot> 
