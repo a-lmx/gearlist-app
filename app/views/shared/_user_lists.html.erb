@@ -2,11 +2,9 @@
   <% @user_lists.each do |list| %>
     <a href="/lists/<%= list["id"] %>" class="list-group-item">
       <%= list["name"] %>
-      <span class="pull-right">
-        <% if list["secret"] %>
-          <i class="fa fa-lock"></i>
-        <% end %>
-      </span>
+      <% if list["secret"] %>
+        <%= render 'shared/right_lock' %>
+      <% end %>
     </a>
   <% end %>
 </div>

@@ -1,20 +1,14 @@
 <div class="panel panel-default" >
   <div class="panel-heading">
     <%= list[:name] %>
-    <span class="pull-right">
-      <% if list[:secret] %>
-        <i class="fa fa-lock"></i>
-      <% end %>
-    </span>
+    <% if list[:secret] %>
+      <%= render 'shared/right_lock' %>
+    <% end %>
   </div>
   <div class="panel-body">
     <%= list[:description] %>
     <% if authorized && params[:action] == 'show' %>
-      <span class='pull-right'>
-        <a href="/lists/<%= params[:id] %>/edit">
-          <i class="fa fa-pencil"></i>
-        </a>
-      </span>
+      <%= render 'shared/right_pencil' %>      
     <% end %>
   </div>
   <table class="table">
