@@ -8,7 +8,8 @@
   <div class="panel-body">
     <%= list[:description] %>
     <% if authorized && params[:action] == 'show' %>
-      <%= render 'shared/right_pencil' %>      
+      <%= render partial: 'shared/right_pencil', 
+        locals: { url: '/lists/' + params[:id] + '/edit' } %>      
     <% end %>
   </div>
   <table class="table">
@@ -19,6 +20,8 @@
         <th>Name</th>
         <th>Quantity</th>
         <th>Weight (gms)</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <% list[:sections].each do |section| %>
@@ -28,7 +31,12 @@
           <td><%= item["category"] %></td>
           <td><%= item["name"] %></td>
           <td><%= item["quantity"] %></td>
-          <td><%= item["weight"] %></td>     
+          <td><%= item["weight"] %></td>
+          <td>
+            <%= render partial: 'shared/right_pencil', 
+              locals: { url: '/lists/' + list[:id].to_s + '/items/' + item['id'].to_s + '/edit' } %>
+          </td>
+          <td>Delete</td>
         </tr>
       <% end %>
       <tr>
@@ -36,7 +44,9 @@
         <td></td>
         <th>Subtotal for <%= section["name"].capitalize %>:</th>
         <td></td>
-        <th><%= section[:subtotal] %></th>            
+        <th><%= section[:subtotal] %></th>
+        <th></th>
+        <th></th>
       </tr>
     <% end %>
     <tfoot> 
