@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
 
   BASE_URI = 'http://localhost:3000/api/v1'
 
+  MESSAGES = {
+    not_yo_list: "You cannot edit someone else's Gear List."
+  }
+
   private
 
   # TODO: have this be wiped out when user logs out
