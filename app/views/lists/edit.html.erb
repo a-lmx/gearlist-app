@@ -2,6 +2,9 @@
   <%= render partial: 'shared/user_lists' %>
 <% end %>
 
-<h3>Edit your Gear List</h3>
+<h3>Edit Your Gear List</h3>
 
-<%= render partial: 'form', locals: { method_name: 'put', url: list_path(params[:id]) } %>
+<%= render partial: 'form', locals: { 
+                              method: 'put', 
+                              url: list_path(params[:id]),
+                              submit_text: 'Update Gear List' } %>
