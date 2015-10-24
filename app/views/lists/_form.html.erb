@@ -1,0 +1,21 @@
+<%= form_for @list, url: { action: "create" }, role: 'form', class: 'form' do |f| %>
+  <div class="form-group">
+    <%= f.label :name, 'List Name:' %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, 'Description:' %>
+    <%= f.text_area :description, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.radio_button :secret, false %>
+    <%= f.label :secret_false, 'Share' %>
+
+    <%= f.radio_button :secret, true %>
+    <%= f.label :secret_true, 'Keep private' %>
+  </div>
+
+  <%= f.hidden_field :user_id, value: @user_id %>
+
+  <%= f.submit 'Create Gear List', class: 'btn btn-default' %>
+<% end %>
