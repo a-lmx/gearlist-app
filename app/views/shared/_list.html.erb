@@ -9,6 +9,13 @@
   </div>
   <div class="panel-body">
     <%= list[:description] %>
+    <% if authorized && params[:action] == 'show' %>
+      <span class='pull-right'>
+        <a href="/lists/<%= params[:id] %>/edit">
+          <i class="fa fa-pencil"></i>
+        </a>
+      </span>
+    <% end %>
   </div>
   <table class="table">
     <thead>
