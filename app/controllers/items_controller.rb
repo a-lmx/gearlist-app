@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
 
   def edit
     list_info = get_list_details(params[:list_id])
-    unless list_info['user_id'] == @current_user_id
+    unless list_info['user_id'].to_s == @current_user_id
       flash[:errors] = ApplicationController::MESSAGES[:not_yo_list]
       redirect_to root_path
     else
@@ -47,17 +47,18 @@ class ItemsController < ApplicationController
         weight:     item_info['weight'],
         quantity:   item_info['quantity'],
         list_id:    params[:list_id],
-        section:    item_info['section']
+        section:    item_info['section'],
+        id:         params[:id]
       )
     end
   end
 
   def update
-    url = ApplicationController::BASE_URI + '/items' + item_params[:id]
+    url = ApplicationController::BASE_URI + '/items/' + item_params[:id]
 
     body_contents = {
       item: {
-        id: item_params['id']
+        id: item_params['id'],
         name: item_params['name'],
         weight: item_params['weight'],
         category: item_params['category']
