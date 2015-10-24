@@ -22,8 +22,6 @@ class ListsController < ApplicationController
   def new
     @list = List.new
     @user_id = session[:user_id]
-    @submit_text = 'Create Gear List'
-    render :new
   end
 
   def create
@@ -57,7 +55,6 @@ class ListsController < ApplicationController
       id: params[:id]
     )
     @user_id = session[:user_id]
-    @submit_text = 'Update Gear List'
   end
 
   def update
