@@ -5,6 +5,6 @@
 
 <%= render partial: 'shared/list', locals: { list: @list } %>
 
-<% if authorized %>
+<% if authorized? %>
   <%= link_to 'Add Items', new_list_item_path(params[:id]), class: 'btn btn-default' %>
 <% end %>
