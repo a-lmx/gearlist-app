@@ -36,9 +36,10 @@ class ListsController < ApplicationController
       name: list_info['name'], 
       description: list_info['description'], 
       secret: list_info['secret'],
-      user_id: session['user_id'],
+      user_id: list_info['user_id'],
       id: params[:id]
     )
+    @user_id = session[:user_id]
     @submit_text = 'Update Gear List'
     render :edit
   end
@@ -54,7 +55,7 @@ class ListsController < ApplicationController
       list_id = contents['list_id']
       redirect_to list_path(list_id)
     else
-      redirect_to edit_list_path
+      render :edit
     end
   end
 
