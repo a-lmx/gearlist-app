@@ -38,6 +38,7 @@ class ListsController < ApplicationController
     list[:name]        = details["name"]
     list[:user_id]     = details["user_id"]
     list[:description] = details["description"]
+    list[:secret]      = details["secret"]
 
     list[:sections] = get_list_sections(list_id)
 
@@ -106,6 +107,6 @@ class ListsController < ApplicationController
   end
 
   def list_params
-    params.require(:list).permit(:user_id, :name, :description)
+    params.require(:list).permit(:user_id, :name, :description, :secret)
   end
 end
