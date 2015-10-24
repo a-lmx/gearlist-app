@@ -20,7 +20,7 @@
     <%= f.number_field :weight, min: 0, class: 'form-control' %>
   </div>
 
-  <%# f.hidden_field :list_id, value: @list_id %>
+  <%= f.hidden_field :id %>
 
   <%= f.submit submit_text, class: 'btn btn-default' %>
 <% end %>
