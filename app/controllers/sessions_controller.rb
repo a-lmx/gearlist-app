@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
 
   def create
     session[:user_id] = params["userId"]
+    session[:user_name] = params["userName"]
     session[:token] = params["token"]
 
     render  json: { success: "You set the session user_id and token." }, 
