@@ -1,8 +1,10 @@
-<div class="list-group">
+<h4>Your Gear Lists:</h4>
+
+<div class='list-group'>
   <% @user_lists.each do |list| %>
-    <a href="/lists/<%= list["id"] %>" class="list-group-item">
-      <%= list["name"] %>
-      <% if list["secret"] %>
+    <a href='/lists/<%= list['id'] %>' class='list-group-item'>
+      <%= list['name'] %>
+      <% if list['secret'] %>
         <%= render 'shared/right_lock' %>
       <% end %>
     </a>

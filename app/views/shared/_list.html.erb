@@ -1,68 +1,70 @@
-<div class="panel panel-default gear-list" >
-  <div class="panel-heading">
+<div class='panel panel-default gear-list' >
+  <div class='panel-heading'>
     <%= list[:name] %>
     <% if list[:secret] %>
       <%= render 'shared/right_lock' %>
     <% end %>
   </div>
-  <div class="panel-body">
+  <div class='panel-body'>
     <%= list[:description] %>
     <% if authorized? && show? %>
       <%= render partial: 'shared/right_pencil', 
         locals: { url: '/lists/' + params[:id] + '/edit' } %>      
     <% end %>
   </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Section</th>
-        <th>Category</th>
-        <th>Name</th>
-        <th>Quantity</th>
-        <th>Weight (gms)</th>
-        <% if show? %>
-          <th></th>
-          <th></th>
-        <% end %>
-      </tr>
-    </thead>
-    <% list[:sections].each do |section| %>
-      <% section[:items].each do |item| %>
+  <div class='table-responsive'>
+    <table class='table'>
+      <thead>
         <tr>
-          <td><%= section["name"] %></td>
-          <td><%= item["category"] %></td>
-          <td><%= item["name"] %></td>
-          <td><%= item["quantity"] %></td>
-          <td><%= item["weight"] %></td>
+          <th>Section</th>
+          <th>Category</th>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Weight (gms)</th>
           <% if show? %>
-            <td>
-                <%= render partial: 'shared/right_pencil', 
-                  locals: { url: '/lists/' + list[:id].to_s + '/items/' + item['id'].to_s + '/edit' } %>
-            </td>
-            <td>Delete</td>
+            <th></th>
+            <th></th>
+          <% end %>
+        </tr>
+      </thead>
+      <% list[:sections].each do |section| %>
+        <% section[:items].each do |item| %>
+          <tr>
+            <td><%= section['name'] %></td>
+            <td><%= item['category'] %></td>
+            <td><%= item['name'] %></td>
+            <td><%= item['quantity'] %></td>
+            <td><%= item['weight'] %></td>
+            <% if show? %>
+              <td>
+                  <%= render partial: 'shared/right_pencil', 
+                    locals: { url: '/lists/' + list[:id].to_s + '/items/' + item['id'].to_s + '/edit' } %>
+              </td>
+              <td>Delete</td>
+            <% end %>
+          </tr>
+        <% end %>
+        <tr>
+          <td></td>
+          <td></td>
+          <th>Subtotal for <%= section['name'].capitalize %>:</th>
+          <td></td>
+          <th><%= section[:subtotal] %></th>
+          <% if show? %>
+            <th></th>
+            <th></th>
           <% end %>
         </tr>
       <% end %>
-      <tr>
-        <td></td>
-        <td></td>
-        <th>Subtotal for <%= section["name"].capitalize %>:</th>
-        <td></td>
-        <th><%= section[:subtotal] %></th>
-        <% if show? %>
-          <th></th>
-          <th></th>
-        <% end %>
-      </tr>
-    <% end %>
-    <tfoot> 
-      <tr>
-        <td></td>
-        <td></td>
-        <th>Total Weight:</th>
-        <td></td>
-        <th><%= list[:total_weight] %></th>
-      </tr>
-    </tfoot>
-  </table>
+      <tfoot> 
+        <tr>
+          <td></td>
+          <td></td>
+          <th>Total Weight:</th>
+          <td></td>
+          <th><%= list[:total_weight] %></th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 </div>
