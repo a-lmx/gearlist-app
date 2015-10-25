@@ -2,8 +2,11 @@
   <h1>
     <%= link_to "Penguin Gear Lists", root_path %> 
     <small>Create, share, hike</small>
+
+    <% if session[:user_id] %>
+      <span class='pull-right'>
+        <%= link_to "Log out", "/logout", method: 'delete', class: "btn btn-default", onclick: "signOut();" %>  
+      </span>
+    <% end %>
   </h1>
-
-  <!-- <p>Current User Id: <%#= session[:user_id] %> </p> -->
-
 </div>
