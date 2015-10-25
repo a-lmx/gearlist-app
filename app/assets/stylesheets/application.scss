@@ -26,6 +26,8 @@ body {
   background-size: 100%;
   background-color: gray;
   background-attachment: fixed;
+
+  font-family: 'Open Sans', sans-serif;
 }
 
 #feed {
@@ -47,4 +49,9 @@ body {
 
 div.gear-list {
   margin: 30px;
+}
+
+h1 {
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 72px;
 }
