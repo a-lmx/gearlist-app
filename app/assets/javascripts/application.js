@@ -14,3 +14,23 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+function signOut() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+    auth2.disconnect();
+    signOutSessions();
+  });
+};
+
+function signOutSessions() {
+  var url = '/logout';
+  $.ajax({
+    url: url,
+    type: 'DELETE',
+    success: function(data, textStatus, jqHXR) {
+      window.location.replace("/login");
+    }
+  });
+};
