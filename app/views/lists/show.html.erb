@@ -7,11 +7,12 @@
 <% if authorized? %>
   <div class='add-items-wrapper'>
     <a href='/lists/<%= params[:id] %>/items/new' class='btn btn-default add-items'>
-      Add
+      <span class='pull-left'>
+        Add Item
+      </span>
       <span class='pull-right'>
-        <i class="fa fa-plus"></i>
+        <i class='fa fa-plus'></i>
       </span>
     </a>
   </div>
-  <%#= link_to 'Add Items', new_list_item_path(params[:id]), class: 'btn btn-default add-items' %>
 <% end %>

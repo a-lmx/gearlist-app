@@ -50,9 +50,25 @@ body {
 }
 
 #login-panel {
-  width: 300px;
-  height: 400px
+  margin-top: 24rem;
+  width: 36rem;
 }
+
+#gSignInWrapper {
+  width: 190px;
+  height: 62px;
+  margin: 50px auto;
+}
+
+#login-btn-label {
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+// .label { 
+//   color: black;
+// }
 
 .navbar {
   background-color: rgba(255, 255, 255, 1);

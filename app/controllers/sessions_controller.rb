@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   skip_before_action :user_lists, :current_user_id, :require_signin
 
   def new
-    render :new
+    render layout: 'login_layout'
   end
 
   def create
