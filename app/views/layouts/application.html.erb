@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Penguin Gear Lists</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -11,13 +12,15 @@
   <body>
     <%= render 'layouts/header' %>
     <div class='container-fluid'>
-      <div class='col-md-2'></div>
-      <div class='col-md-8' id='feed'>
-        <%= render partial: 'shared/flash_messages' %>
-        <%= yield %>
-      </div>
-      <div class='col-md-2' id='sidebar'>
-        <%= yield :sidebar %>
+      <div class='row'>
+        <div class='col-md-2'></div>
+        <div class='col-md-8' id='feed'>
+          <%= render partial: 'shared/flash_messages' %>
+          <%= yield %>
+        </div>
+        <div class='col-md-2' id='sidebar'>
+          <%= render partial: 'layouts/sidebar' %>
+        </div>
       </div>
     </div>
   </body>

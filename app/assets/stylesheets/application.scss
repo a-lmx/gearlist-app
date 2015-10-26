@@ -22,7 +22,8 @@ a {
 }
 
 body {
-  padding-top: 200px;
+  // padding-top: 200px;
+  padding: 12rem 2rem 0 2rem;
 
   background-image: url('IMG_0683_hitchcock_lake.jpg');
   background-size: 100%;
@@ -37,7 +38,11 @@ body {
 }
 
 #sidebar {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 1);
+  padding: 2rem;
+  position: fixed;
+  // width: 100%;
+  right: 0;
 }
 
 #login-panel {
@@ -45,8 +50,10 @@ body {
   height: 400px
 }
 
-.page-header {
-  background-color: rgba(255, 255, 255, 0.7);
+.navbar {
+  background-color: rgba(255, 255, 255, 1);
+  padding: 2rem;
+  height: 12rem;
 }
 
 div.gear-list {
