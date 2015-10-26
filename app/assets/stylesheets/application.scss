@@ -26,14 +26,14 @@ body {
 
   background-image: url('IMG_0683_hitchcock_lake.jpg');
   background-size: 100%;
-  background-color: gray;
+  background-color: rgba(210,238,255, 1);
   background-attachment: fixed;
-
   font-family: 'Open Sans', sans-serif;
 }
 
 #feed {
   background-color: rgba(255, 255, 255, 0.6);
+  padding: 3rem;
   // width: 75%;
 }
 
@@ -60,6 +60,10 @@ body {
 
 div.gear-list {
   margin: 3rem auto;
+}
+
+div.gear-list:first-child {
+  margin-top: 0;
 }
 
 h1 {
