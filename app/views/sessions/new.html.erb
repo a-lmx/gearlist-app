@@ -5,6 +5,8 @@
     <script type="text/javascript">
       var googleUser = {};
 
+      const BASE_URI = 'http://www.penguingearlist.com' + '/api/v1';
+
       var startApp = function() {
         gapi.load('auth2', function(){
           // Retrieve the singleton for the GoogleAuth library and set up the client.
@@ -35,7 +37,8 @@
       };
 
       function loginUser(userDetails) {
-        var url = 'http://localhost:3000/api/v1/login'
+        var url = BASE_URI + '/login';
+        console.log(url);
         $.ajax({
           url: url,
           type: 'POST',
