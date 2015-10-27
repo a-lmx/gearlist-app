@@ -41,12 +41,17 @@ body {
 }
 
 #sidebar {
-  background-color: rgba(210,238,255, 0.9);
+  background-color: rgba(177,231,255, 0.95); 
+
   padding: 3rem;
   position: fixed;
   height: 100%;
   border-color: white;
   left: 0;
+}
+
+#sidebar-title {
+  margin-bottom: 3rem;
 }
 
 #login-panel {
@@ -81,10 +86,6 @@ body {
 .btn.add-items {
   width: 20rem;
   margin: 0 auto;
-}
-
-.list-table {
-  // width: auto;
 }
 
 div.add-items {
