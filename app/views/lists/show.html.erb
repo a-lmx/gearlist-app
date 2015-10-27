@@ -1,7 +1,7 @@
 <%= render partial: 'shared/list', locals: { list: @list } %>
 
 <% if authorized? %>
-  <div class='add-items-wrapper'>
+  <div class='add-items-wrapper pull-left'>
     <a href='/lists/<%= params[:id] %>/items/new' class='btn btn-default add-items'>
       <span class='pull-left'>
         Add Item
@@ -10,5 +10,9 @@
         <i class='fa fa-plus'></i>
       </span>
     </a>
+  </div>
+
+  <div class='pull-right'>
+    <%= link_to 'Delete Gear List', list_path(@list), method: :delete, class: 'btn btn-danger' %>
   </div>
 <% end %>
