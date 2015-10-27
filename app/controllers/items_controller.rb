@@ -85,13 +85,13 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    url = ApplicationController::BASE_URI + '/items/' + item_params[:id]
-
     list_info = get_list_details(params[:list_id])
     unless list_info['user_id'].to_s == @current_user_id
       flash[:errors] = ApplicationController::MESSAGES[:not_yo_list]
     else
       item_id = params[:id]
+      url = ApplicationController::BASE_URI + '/items/' + params[:id]
+
       response = HTTParty.delete(
         url,
         body: { list_section_item_id: item_id },
