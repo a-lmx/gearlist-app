@@ -95,7 +95,7 @@ class ItemsController < ApplicationController
     url = ApplicationController::BASE_URI + '/sections'
     response = HTTParty.get(url, headers: auth_header)
     section_objects = response.parsed_response
-    section_objects.map { |section| [section['name']] }
+    section_objects.map { |section| [section['name'], section['name']] }
   end
 
   def item_params
