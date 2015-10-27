@@ -14,8 +14,8 @@
   <div class='panel-body'>
     <%= list[:description] %>
     <% if authorized? && show? %>
-      <%= render partial: 'shared/right_pencil', 
-        locals: { url: '/lists/' + params[:id] + '/edit' } %>      
+      <%= render partial: 'shared/right_icon', 
+        locals: { icon_name: 'pencil', url: '/lists/' + params[:id] + '/edit' } %>      
     <% end %>
   </div>
   <div class='table-responsive'>
@@ -28,8 +28,8 @@
           <th>Quantity</th>
           <th>Weight (gms)</th>
           <% if show? %>
-            <th></th>
-            <th></th>
+            <th>Edit</th>
+            <th>Remove</th>
           <% end %>
         </tr>
       </thead>
@@ -42,11 +42,16 @@
             <td><%= item['quantity'] %></td>
             <td><%= item['weight'] %></td>
             <% if show? %>
-              <td>
-                  <%= render partial: 'shared/right_pencil', 
-                    locals: { url: '/lists/' + list[:id].to_s + '/items/' + item['id'].to_s + '/edit' } %>
+              <td class='text-center'>
+                <%= link_to '/lists/' + list[:id].to_s + '/items/' + item['id'].to_s + '/edit' do %>
+                  <i class='fa fa-pencil'></i>
+                <% end %>
               </td>
-              <td>Delete</td>
+              <td class='text-center'>
+                <%= link_to '/' do %>
+                  <i class='fa fa-times'></i>
+                <% end %>
+              </td>
             <% end %>
           </tr>
         <% end %>
