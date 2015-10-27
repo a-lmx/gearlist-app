@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'lists#index'
 
   resources :lists, only: [:index, :show, :new, :create, :edit, :update] do
-    resources :items, only: [:new, :create, :edit, :update]
+    resources :items, only: [:new, :create, :edit, :update, :destroy]
   end
 
   get '/login', to: 'sessions#new', as: 'login'
