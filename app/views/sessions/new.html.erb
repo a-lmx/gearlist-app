@@ -10,12 +10,13 @@
       // const BASE_URI = 'http://gearlist-app-prod.elasticbeanstalk.com' + '/api/v1';
 
       var railsEnv = '<%= Rails.env %>';
-      
+      var baseUri;
+
       if (railsEnv === 'production') {
-        const BASE_URI = 'http://gearlist-app-prod.elasticbeanstalk.com' + '/api/v1';
+        baseUri = 'http://gearlist-app-prod.elasticbeanstalk.com' + '/api/v1';
       }
       else {
-        const BASE_URI = 'http://localhost:3000/api/v1';
+        baseUri = 'http://localhost:3000' + '/api/v1';
       }
 
       var startApp = function() {
@@ -48,7 +49,7 @@
       };
 
       function loginUser(userDetails) {
-        var url = BASE_URI + '/login';
+        var url = baseUri + '/login';
         console.log(url);
         $.ajax({
           url: url,
