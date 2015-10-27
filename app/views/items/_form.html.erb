@@ -1,12 +1,7 @@
 <%= form_for @item, url: url, method: method, role: 'form', class: 'form' do |f| %>
   <div class="form-group">
     <%= f.label :section, 'Section:' %>
-    <%= f.select(:section) do %>
-      <% @sections.each do |c| -%>
-        <%= content_tag(:option, c.first, value: c.first) %>
-      <% end %>
-    <% end %>
-    <%#= f.text_field :section, placeholder: "packing, shelter \& sleeping, or kitchen...", class: 'form-control' %>
+    <%= f.select(:section, @sections, {}, { class: 'form-control' }) %>
   </div>
   <div class="form-group">
     <%= f.label :category, 'Category:' %>
