@@ -32,7 +32,7 @@ class ListsController < ApplicationController
     list_info = get_list_details(params[:id])
 
     unless list_info['user_id'].to_s == @current_user_id
-      flash[:errors] = ApplicationController::MESSAGES[:not_yo_list]
+      flash[:errors] = ApplicationController::MESSAGES[:not_yo_list_edit]
       redirect_to root_path
     end
 
@@ -50,7 +50,11 @@ class ListsController < ApplicationController
     url = ApplicationController::BASE_URI + '/lists/' + list_params[:id]
 
     body_contents = { list: list_params }
-    response = HTTParty.put(url, body: body_contents, headers: auth_header)
+    response = HTTParty.put(
+      url, 
+      body: body_contents, 
+      headers: auth_header
+    )
     contents = response.parsed_response
 
     if contents['success']
@@ -58,6 +62,29 @@ class ListsController < ApplicationController
       redirect_to list_path(list_id)
     else
       render :edit
+    end
+  end
+
+  def destroy
+    list_info = get_list_details(params[:id])
+
+    unless list_info['user_id'].to_s == @current_user_id
+      flash[:errors] = ApplicationController::MESSAGES[:not_yo_list_delete]
+      redirect_to list_path(params[:id])
+    else
+      url = ApplicationController::BASE_URI + '/lists/' + params[:id]
+      response = HTTParty.delete(
+        url,
+        headers: auth_header
+      )
+
+      contents = response.parsed_response
+
+      if contents['failure']
+        flash[:errors] = 'Something went wrong. Please try again.'
+      end
+
+      redirect_to root_path
     end
   end
 
