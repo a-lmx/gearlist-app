@@ -1,13 +1,15 @@
 <div class='panel panel-default gearlist-panel' >
   <div class='panel-heading'>
-    <% if show? %>
-      <%= list[:name] %>
-    <% else %>
-      <%= link_to list[:name], list_path(list[:id]) %>
-    <% end %>
-    <% if list[:secret] %>
-      <%= render 'shared/right_lock' %>
-    <% end %>
+    <h4>
+      <% if show? %>
+        <%= list[:name] %>
+      <% else %>
+        <%= link_to list[:name], list_path(list[:id]) %>
+      <% end %>
+      <% if list[:secret] %>
+        <%= render 'shared/right_lock' %>
+      <% end %>
+    </h4>
   </div>
   <div class='panel-body'>
     <%= list[:description] %>
