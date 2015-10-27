@@ -46,7 +46,7 @@ body {
   position: fixed;
   height: 100%;
   border-color: white;
-  right: 0;
+  left: 0;
 }
 
 #login-panel {
@@ -79,15 +79,20 @@ body {
   margin: 0 auto;
 }
 
+.list-table {
+  // width: auto;
+}
+
 div.add-items {
   margin: 0 auto;
 }
 
-div.gear-list {
+div.gearlist-panel {
   margin: 3rem auto;
+  width: auto;
 }
 
-div.gear-list:first-child {
+div.gearlist-panel:first-child {
   margin-top: 0;
 }
 
