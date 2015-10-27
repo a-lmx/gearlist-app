@@ -54,6 +54,11 @@ body {
   margin-bottom: 3rem;
 }
 
+#copyright {
+  position: fixed;
+  bottom: 2rem;
+}
+
 #login-panel {
   margin-top: 24rem; // from the top of the page
   width: 36rem; // width of panel
@@ -70,10 +75,6 @@ body {
 #login-btn-wrapper {
   width: 190px;
   margin: 0 auto;
-}
-
-#user-greeting {
-  padding: 15px 0;
 }
 
 .navbar {
