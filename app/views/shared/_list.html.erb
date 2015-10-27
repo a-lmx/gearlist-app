@@ -15,7 +15,7 @@
     <%= list[:description] %>
     <% if authorized? && show? %>
       <%= render partial: 'shared/right_icon', 
-        locals: { icon_name: 'pencil', url: '/lists/' + params[:id] + '/edit' } %>      
+        locals: { icon_name: 'pencil', url: '/lists/' + params[:id] + '/edit' } %>
     <% end %>
   </div>
   <div class='table-responsive'>
