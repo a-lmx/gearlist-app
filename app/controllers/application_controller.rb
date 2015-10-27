@@ -4,8 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :user_lists, :current_user_id, :require_signin
 
-  # BASE_URI = 'http://localhost:3000/api/v1'
-  BASE_URI = 'http://www.penguingearlist.com'+'/api/v1'
+  # add if Rails.env == production
+  BASE_URI = 'http://localhost:3000/api/v1'
+  # BASE_URI = 'http://www.penguingearlist.com'+'/api/v1'
 
   MESSAGES = {
     not_yo_list: "You cannot edit someone else's Gear List."

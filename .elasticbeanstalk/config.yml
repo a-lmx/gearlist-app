@@ -1,0 +1,10 @@
+branch-defaults:
+  master:
+    environment: penguin-gearlist-prod
+global:
+  application_name: gearlist-app
+  default_ec2_keyname: gearlist-app-aws-eb
+  default_platform: Ruby 2.2 (Puma)
+  default_region: us-west-2
+  profile: eb-cli
+  sc: git
