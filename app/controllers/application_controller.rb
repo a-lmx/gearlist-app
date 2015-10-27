@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   # BASE_URI = 'http://www.penguingearlist.com'+'/api/v1'
 
   MESSAGES = {
-    not_yo_list: "You cannot edit someone else's Gear List."
+    not_yo_list_edit: "You cannot edit someone else's Gear List.",
+    not_yo_list_delete: "You cannot delete someone else's Gear List"
   }
 
   private
