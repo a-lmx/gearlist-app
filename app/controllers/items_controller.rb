@@ -2,6 +2,8 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @list_id = params[:list_id]
+    # make API call to get list of section names
+    @sections = get_sections
     render :new
   end
 
@@ -81,28 +83,19 @@ class ItemsController < ApplicationController
     redirect_to list_path(params[:list_id])
   end
 
-  ### From ListsController
-  # def update
-  #   url = ApplicationController::BASE_URI + '/lists/' + list_params[:id]
-
-  #   body_contents = { list: list_params }
-  #   response = HTTParty.put(url, body: body_contents, headers: auth_header)
-  #   contents = response.parsed_response
-
-  #   if contents['success']
-  #     list_id = contents['list_id']
-  #     redirect_to list_path(list_id)
-  #   else
-  #     render :edit
-  #   end
-  # end
-
   private
 
   def get_item_details(item_id)
     url = ApplicationController::BASE_URI + '/items/' + item_id.to_s
     response = HTTParty.get(url, headers: auth_header)
     return response.parsed_response
+  end
+
+  def get_sections
+    url = ApplicationController::BASE_URI + '/sections'
+    response = HTTParty.get(url, headers: auth_header)
+    section_objects = response.parsed_response
+    section_objects.map { |section| [section['name']] }
   end
 
   def item_params
