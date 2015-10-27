@@ -48,7 +48,7 @@
                 <% end %>
               </td>
               <td class='text-center'>
-                <%= link_to '/' do %>
+                <%= link_to '/lists/' + list[:id].to_s + '/items/' + item['id'].to_s, method: :delete do %>
                   <i class='fa fa-times'></i>
                 <% end %>
               </td>
