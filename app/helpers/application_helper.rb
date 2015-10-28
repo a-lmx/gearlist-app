@@ -6,4 +6,8 @@ module ApplicationHelper
   def show?
     params[:action] == 'show'
   end
+
+  def search?
+    params[:action] == 'search'
+  end
 end
