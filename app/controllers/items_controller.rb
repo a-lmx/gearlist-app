@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
   def new
+    # add check for if params[:item_id]
+    # => make call to API for item info, assign to @item
     @item = Item.new
     @list_id = params[:list_id]
     # make API call to get list of section names
@@ -103,6 +105,14 @@ class ItemsController < ApplicationController
     end
 
     redirect_to list_path(params[:list_id])
+  end
+
+  def search
+    # search_url = build_items_search_url(params[:search])
+
+    # make call to API with search term
+    # get back up to 10 items matching that description and their weights and categories
+    # select item, go back to new page, passing through item id
   end
 
   private
