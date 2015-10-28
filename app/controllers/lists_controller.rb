@@ -1,6 +1,15 @@
 class ListsController < ApplicationController
   def index
-    @lists = get_lists
+    if params[:search]
+      search_url = build_search_url(params[:search])
+      @lists = get_lists(search_url)
+      if @lists == nil || @lists.length == 0
+        flash[:errors] = "Sorry, we can't find any lists relating to '#{params[:search]}', so here are all the lists."
+        @lists = get_lists('/lists')
+      end
+    else
+      @lists = get_lists('/lists')
+    end
   end
 
   def show
@@ -113,11 +122,12 @@ class ListsController < ApplicationController
     return list
   end
 
-  def get_lists
+  def get_lists(url_param)
     list_ids = []
     lists = []
 
-    url = ApplicationController::BASE_URI + '/lists'
+    # url = ApplicationController::BASE_URI + '/lists'
+    url = ApplicationController::BASE_URI + url_param
     retrieved_lists = HTTParty.get(url, headers: auth_header).parsed_response
 
     retrieved_lists.each do |list|
@@ -159,6 +169,10 @@ class ListsController < ApplicationController
     end
 
     return sum
+  end
+
+  def build_search_url(query_string)
+    '/lists/search?q=' + query_string
   end
 
   def list_params
