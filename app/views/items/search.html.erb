@@ -11,4 +11,6 @@
   <%= submit_tag 'Continue with selected item', class: 'btn btn-default' %>
 <% end %>
 
-<%= link_to 'Cancel', new_list_item_path(params[:list_id]), class: 'btn btn-danger' %>
+<%= link_to '/lists/' + params[:list_id].to_s + '/items/new', class: 'btn btn-default' do %>
+  <i class='fa fa-arrow-left'></i> Back
+<% end %>
