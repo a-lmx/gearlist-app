@@ -1,10 +1,17 @@
 class ItemsController < ApplicationController
   def new
-    # add check for if params[:item_id]
-    # => make call to API for item info, assign to @item
-    @item = Item.new
+    if params[:item_id]
+      item_info = get_raw_item_details(params[:item_id])
+      @item = Item.new(
+        name:       item_info['name'],
+        category:   item_info['category'],
+        weight:     item_info['weight'],
+        list_id:    params[:list_id],
+      )
+    else
+      @item = Item.new
+    end
     @list_id = params[:list_id]
-    # make API call to get list of section names
     @sections = get_sections
     render :new
   end
@@ -109,19 +116,21 @@ class ItemsController < ApplicationController
 
   def search
     url = ApplicationController::BASE_URI + '/items/search?q=' + params[:search]
-    # make call to API with search term
     response = HTTParty.get(url, headers: auth_header)
-    # get back up to 10 items matching that description and their weights and categories
-    @items = response.parsed_response
 
-    # select item, go back to new page, passing through item id
-    # redirect_to '/lists/#{params[:list_id]}/items/new?item=#{item_id}'
+    @items = response.parsed_response
   end
 
   private
 
   def get_item_details(item_id)
     url = ApplicationController::BASE_URI + '/items/' + item_id.to_s
+    response = HTTParty.get(url, headers: auth_header)
+    return response.parsed_response
+  end
+
+  def get_raw_item_details(item_id)
+    url = ApplicationController::BASE_URI + '/items/raw/' + item_id.to_s
     response = HTTParty.get(url, headers: auth_header)
     return response.parsed_response
   end
