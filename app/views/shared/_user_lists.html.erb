@@ -3,7 +3,7 @@
     <a href='/lists/<%= list['id'] %>' class='list-group-item'>
       <%= list['name'] %>
       <% if list['secret'] %>
-        <%= render 'shared/right_lock' %>
+        <i class='fa fa-lock pull-right'></i>
       <% end %>
     </a>
   <% end %>
