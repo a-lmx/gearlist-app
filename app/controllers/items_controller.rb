@@ -108,11 +108,14 @@ class ItemsController < ApplicationController
   end
 
   def search
-    # search_url = build_items_search_url(params[:search])
-
+    url = ApplicationController::BASE_URI + '/items/search?q=' + params[:search]
     # make call to API with search term
+    response = HTTParty.get(url, headers: auth_header)
     # get back up to 10 items matching that description and their weights and categories
+    @items = response.parsed_response
+
     # select item, go back to new page, passing through item id
+    # redirect_to '/lists/#{params[:list_id]}/items/new?item=#{item_id}'
   end
 
   private
