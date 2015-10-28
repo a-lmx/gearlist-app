@@ -5,7 +5,7 @@
   <% @items.each do |item| %>
     <%#= label_tag :item_id item['name'] %>
     <div class='radio'>
-      <%= radio_button_tag :item_id, item['id'] %> <%= item['name'] %>
+      <%= radio_button_tag :item_id, item['id'] %> <%= item['name'] + ', weight: ' + item['weight'].to_s %>
     </div>
   <% end %>
   <%= submit_tag 'Continue with selected item', class: 'btn btn-default' %>
