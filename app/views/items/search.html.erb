@@ -2,7 +2,7 @@
 
 <%= form_tag(new_list_item_path(params[:list_id]), method: :get, class: 'form') do %>
 
-<%= submit_tag 'Continue with selected item' %>
+  <%= submit_tag 'Continue with selected item', class: 'btn btn-default' %>
 <% end %>
 
 <!-- cancel button -->
