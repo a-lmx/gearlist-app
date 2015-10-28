@@ -99,6 +99,7 @@ class ListsController < ApplicationController
     list[:description] = details["description"]
     list[:secret]      = details["secret"]
     list[:id]          = details['id']
+    list[:user_name]   = details['user_name']
 
     list[:sections] = get_list_sections(list_id)
 
