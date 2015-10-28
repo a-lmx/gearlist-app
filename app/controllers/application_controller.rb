@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :user_lists, :current_user_id, :require_signin
 
   if Rails.env.production?
-    BASE_URI = 'http://gearlist-app-prod.elasticbeanstalk.com' + '/api/v1'
+    BASE_URI = 'http://gearlist-api-prod.elasticbeanstalk.com' + '/api/v1'
   else
     BASE_URI = 'http://localhost:3000/api/v1'
   end
