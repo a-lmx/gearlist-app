@@ -7,9 +7,10 @@
         <%= link_to list[:name], list_path(list[:id]) %>
       <% end %>
       <% if list[:secret] %>
-        <%= render 'shared/right_lock' %>
+        <i class="fa fa-lock pull-right"></i>
       <% end %>
     </h4>
+    <p>by: <%= list[:user_name] %></p>
   </div>
   <div class='panel-body'>
     <%= list[:description] %>
