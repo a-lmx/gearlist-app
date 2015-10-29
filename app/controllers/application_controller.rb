@@ -13,7 +13,6 @@ class ApplicationController < ActionController::Base
   else
     BASE_URI = 'http://localhost:3000/api/v1'
   end
-  # BASE_URI = 'http://www.penguingearlist.com'+'/api/v1'
 
   MESSAGES = {
     not_yo_list_edit: "You cannot edit someone else's Gear List.",
@@ -46,11 +45,12 @@ class ApplicationController < ActionController::Base
 
   def require_signin
     unless @current_user_id
-      # flash[:errors] = MESSAGES[:not_signed_in]
       redirect_to login_path
     end
   end
 
+  #############################################################################
+  # For auto-reloading /lib files
   def _reload_libs
     RELOAD_LIBS.each do |lib|
       require_dependency lib
