@@ -39,7 +39,8 @@ class GearlistApi
 
   def lists(url_param)
     url = GEARLIST_URI + url_param
-    retrieved_lists = HTTParty.get(url, headers: auth_header).parsed_response
+    response = HTTParty.get(url, headers: auth_header)
+    response.parsed_response
   end
 
   def get_list_details(list_id)
@@ -59,7 +60,6 @@ class GearlistApi
     response = HTTParty.get(url, headers: auth_header)
     return response.parsed_response
   end
-
 
   def get_item_details(item_id)
     url = GEARLIST_URI + '/items/' + item_id.to_s
@@ -84,4 +84,5 @@ class GearlistApi
     response = HTTParty.get(url, headers: auth_header)
     response.parsed_response
   end
+
 end
