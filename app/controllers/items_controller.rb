@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    list_info = get_list_details(params[:list_id])
+    list_info = @gearlist_api.get_list_details(params[:list_id])
     unless list_info['user_id'].to_s == @current_user_id
       flash[:errors] = ApplicationController::MESSAGES[:not_yo_list]
       redirect_to root_path
@@ -94,7 +94,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    list_info = get_list_details(params[:list_id])
+    list_info = @gearlist_api.get_list_details(params[:list_id])
     unless list_info['user_id'].to_s == @current_user_id
       flash[:errors] = ApplicationController::MESSAGES[:not_yo_list]
     else

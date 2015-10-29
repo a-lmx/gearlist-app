@@ -39,7 +39,7 @@ class ListsController < ApplicationController
   end
 
   def edit
-    list_info = get_list_details(params[:id])
+    list_info = @gearlist_api.get_list_details(params[:id])
 
     unless list_info['user_id'].to_s == @current_user_id
       flash[:errors] = ApplicationController::MESSAGES[:not_yo_list_edit]
@@ -76,7 +76,7 @@ class ListsController < ApplicationController
   end
 
   def destroy
-    list_info = get_list_details(params[:id])
+    list_info = @gearlist_api.get_list_details(params[:id])
 
     unless list_info['user_id'].to_s == @current_user_id
       flash[:errors] = ApplicationController::MESSAGES[:not_yo_list_delete]
@@ -103,7 +103,7 @@ class ListsController < ApplicationController
   def build_list(list_id)
     list = {}
 
-    details = get_list_details(list_id)
+    details = @gearlist_api.get_list_details(list_id)
     list[:name]        = details["name"]
     list[:user_id]     = details["user_id"]
     list[:description] = details["description"]
