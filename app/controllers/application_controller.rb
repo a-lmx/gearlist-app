@@ -37,11 +37,11 @@ class ApplicationController < ActionController::Base
   #   return response.parsed_response
   # end
 
-  def get_list_details(list_id)
-    url = BASE_URI + '/lists/' + list_id.to_s
-    response = HTTParty.get(url, headers: auth_header)
-    return response.parsed_response
-  end
+  # def get_list_details(list_id)
+  #   url = BASE_URI + '/lists/' + list_id.to_s
+  #   response = HTTParty.get(url, headers: auth_header)
+  #   return response.parsed_response
+  # end
 
   def auth_header
     token = session[:token]
