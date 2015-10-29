@@ -58,7 +58,7 @@ class ListsController < ApplicationController
   def update
     url = '/lists/' + list_params[:id]
     body = { list: list_params }
-    
+
     response = @gearlist_api.put(url, body)
 
     if response['success']
@@ -76,15 +76,11 @@ class ListsController < ApplicationController
       flash[:errors] = ApplicationController::MESSAGES[:not_yo_list_delete]
       redirect_to list_path(params[:id])
     else
-      url = ApplicationController::BASE_URI + '/lists/' + params[:id]
-      response = HTTParty.delete(
-        url,
-        headers: auth_header
-      )
+      url = '/lists/' + params[:id]
 
-      contents = response.parsed_response
+      response = @gearlist_api.delete(url)
 
-      if contents['failure']
+      if response['failure']
         flash[:errors] = 'Something went wrong. Please try again.'
       end
 

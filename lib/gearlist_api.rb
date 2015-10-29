@@ -25,6 +25,12 @@ class GearlistApi
     return response.parsed_response
   end
 
+  def delete(url_snippet)
+    url = GEARLIST_URI + url_snippet
+    response = HTTParty.delete(url, headers: auth_header)
+    return response.parsed_response
+  end
+
   def get_user_lists(user_id)
     url = GEARLIST_URI + '/users/' + user_id.to_s + '/lists'
     response = HTTParty.get(url, headers: auth_header)
