@@ -61,7 +61,7 @@
           <td></td>
           <th>Subtotal for <%= section['name'].capitalize %>:</th>
           <td></td>
-          <th><%= section[:subtotal] %></th>
+          <th><%= gms_to_oz(section[:subtotal]) %></th>
           <% if show? %>
             <th></th>
             <th></th>
@@ -74,7 +74,7 @@
           <td></td>
           <th>Total Weight:</th>
           <td></td>
-          <th><%= list[:total_weight] %></th>
+          <th><%= gms_to_oz(list[:total_weight]) %></th>
           <% if show? %>
             <th></th>
             <th></th>
