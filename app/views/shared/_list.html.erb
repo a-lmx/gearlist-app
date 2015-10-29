@@ -41,7 +41,7 @@
             <td><%= item['category'] %></td>
             <td><%= item['name'] %></td>
             <td><%= item['quantity'] %></td>
-            <td class='text-right'><%= gms_to_oz(item['weight']) %></td>
+            <td class='text-right'><%= gms_to_lbs_oz(item['weight']) %></td>
             <% if show? %>
               <td class='text-center'>
                 <%= link_to '/lists/' + list[:id].to_s + '/items/' + item['id'].to_s + '/edit' do %>
@@ -61,7 +61,7 @@
           <td></td>
           <th>Subtotal for <%= section['name'].capitalize %>:</th>
           <td></td>
-          <th class='text-right'><%= gms_to_oz(section[:subtotal]) %></th>
+          <th class='text-right'><%= gms_to_lbs_oz(section[:subtotal]) %></th>
           <% if show? %>
             <th></th>
             <th></th>
@@ -74,7 +74,7 @@
           <td></td>
           <th>Total Weight:</th>
           <td></td>
-          <th class='text-right'><%= gms_to_oz(list[:total_weight]) %></th>
+          <th class='text-right'><%= gms_to_lbs_oz(list[:total_weight]) %></th>
           <% if show? %>
             <th></th>
             <th></th>
