@@ -1,4 +1,5 @@
 require 'gearlist_api'
+require 'gearlist_mapper'
 
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
