@@ -1,7 +1,11 @@
+require 'gearlist_api'
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_filter :_reload_libs, :if => :_reload_libs?
+
   before_action :user_lists, :current_user_id, :require_signin
 
   if Rails.env.production?
@@ -55,5 +59,15 @@ class ApplicationController < ActionController::Base
       # flash[:errors] = MESSAGES[:not_signed_in]
       redirect_to login_path
     end
+  end
+
+  def _reload_libs
+    RELOAD_LIBS.each do |lib|
+      require_dependency lib
+    end
+  end
+
+  def _reload_libs?
+    defined? RELOAD_LIBS
   end
 end
