@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
       @item = Item.new(
         name:       item_info['name'],
         category:   item_info['category'],
-        weight:     item_info['weight'],
+        weight:     gms_to_oz(item_info['weight']),
         list_id:    params[:list_id],
       )
     else
@@ -56,7 +56,7 @@ class ItemsController < ApplicationController
       @item = Item.new(
         name:       item_info['name'],
         category:   item_info['category'],
-        weight:     item_info['weight'],
+        weight:     gms_to_oz(item_info['weight']),
         quantity:   item_info['quantity'],
         list_id:    params[:list_id],
         section:    item_info['section'],
@@ -150,6 +150,10 @@ class ItemsController < ApplicationController
 
   def oz_to_gms(weight)
     (weight.to_f * 28.3495).to_i
+  end
+
+  def gms_to_oz(weight)
+    (weight * 0.035274).round(1)
   end
 
   def item_params
