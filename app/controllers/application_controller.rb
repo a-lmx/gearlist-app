@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
 
   MESSAGES = {
     not_yo_list_edit: "You cannot edit someone else's Gear List.",
-    not_yo_list_delete: "You cannot delete someone else's Gear List."
+    not_yo_list_delete: "You cannot delete someone else's Gear List.",
+    items_search_failure: "We didn't find any matching items. Please enter the item data manually."
   }
 
   private
