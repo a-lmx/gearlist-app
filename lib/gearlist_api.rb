@@ -19,8 +19,25 @@ class GearlistApi
     return response.parsed_response
   end
 
+  def lists(url_param)
+    url = GEARLIST_URI + url_param
+    retrieved_lists = HTTParty.get(url, headers: auth_header).parsed_response
+  end
+
   def get_list_details(list_id)
     url = GEARLIST_URI + '/lists/' + list_id.to_s
+    response = HTTParty.get(url, headers: auth_header)
+    return response.parsed_response
+  end
+
+  def get_list_sections(list_id)
+    url = GEARLIST_URI + '/lists/' + list_id.to_s + '/sections'
+    response = HTTParty.get(url, headers: auth_header)
+    return response.parsed_response
+  end
+
+  def get_section_items(section_id)
+    url = GEARLIST_URI + '/list-sections/' + section_id.to_s + '/items'
     response = HTTParty.get(url, headers: auth_header)
     return response.parsed_response
   end
