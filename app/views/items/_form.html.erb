@@ -16,8 +16,8 @@
     <%= f.number_field :quantity, min: 0, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :weight, 'Weight (in gms):' %>
-    <%= f.number_field :weight, min: 0, class: 'form-control' %>
+    <%= f.label :weight, 'Weight (oz.):' %>
+    <%= f.number_field :weight, min: 0, step: 0.1, class: 'form-control' %>
   </div>
 
   <%= f.hidden_field :id %>
