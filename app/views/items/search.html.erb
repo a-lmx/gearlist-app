@@ -1,16 +1,18 @@
 <h2>Select an item:</h2>
 
 <%= form_tag(new_list_item_path(params[:list_id]), method: :get, class: 'form') do %>
-
   <% @items.each do |item| %>
-    <%#= label_tag :item_id item['name'] %>
-    <div class='radio'>
-      <%= radio_button_tag :item_id, item['id'] %> <%= item['name'] + ', weight: ' + item['weight'].to_s %>
+    <div class='form-group'>
+      <div class='form-control'>
+        <%= radio_button_tag :item_id, item['id'] %>  <%= item['name'] + ', weight: ' + item['weight'].to_s %>
+      </div>
     </div>
   <% end %>
   <%= submit_tag 'Continue with selected item', class: 'btn btn-default' %>
 <% end %>
 
+<span class='pull-right'>
 <%= link_to '/lists/' + params[:list_id].to_s + '/items/new', class: 'btn btn-default' do %>
   <i class='fa fa-arrow-left'></i> Back
 <% end %>
+</span>
