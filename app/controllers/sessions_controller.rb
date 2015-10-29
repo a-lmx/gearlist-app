@@ -17,8 +17,7 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     session[:token] = nil
-
-    # flash message here - Thanks for using Penguin Gear Lists!
+    
     redirect_to login_path
   end
 end
