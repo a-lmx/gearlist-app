@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :_reload_libs, :if => :_reload_libs?
 
-  before_action :user_lists, :current_user_id, :require_signin
+  before_action :initialize_api, :user_lists, :current_user_id, :require_signin
 
   if Rails.env.production?
     BASE_URI = 'http://gearlist-api-prod.elasticbeanstalk.com' + '/api/v1'
@@ -23,17 +23,19 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # TODO: have this be wiped out when user logs out
-  # or maybe just make a new call each time -> you'd want it to update when a new list is created
-  def user_lists
-    @user_lists = get_user_lists(session[:user_id])
+  def initialize_api
+    @gearlist_api = GearlistApi.new(session[:token])
   end
 
-  def get_user_lists(user_id)
-    url = BASE_URI + '/users/' + user_id.to_s + '/lists'
-    response = HTTParty.get(url, headers: auth_header)
-    return response.parsed_response
+  def user_lists
+    @user_lists = @gearlist_api.get_user_lists(session[:user_id])
   end
+
+  # def get_user_lists(user_id)
+  #   url = BASE_URI + '/users/' + user_id.to_s + '/lists'
+  #   response = HTTParty.get(url, headers: auth_header)
+  #   return response.parsed_response
+  # end
 
   def get_list_details(list_id)
     url = BASE_URI + '/lists/' + list_id.to_s
