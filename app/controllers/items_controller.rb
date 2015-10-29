@@ -91,10 +91,8 @@ class ItemsController < ApplicationController
   end
 
   def search
-    url = ApplicationController::BASE_URI + '/items/search?q=' + params[:search]
-    response = HTTParty.get(url, headers: auth_header)
-
-    @items = response.parsed_response
+    @items = @gearlist_api.search_items(params[:search])
+    
     if @items.length == 0
       flash[:errors] = ApplicationController::MESSAGES[:items_search_failure]
       redirect_to new_list_item_path(params[:list_id])

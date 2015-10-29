@@ -73,6 +73,12 @@ class GearlistApi
     return response.parsed_response
   end
 
+  def search_items(query_term)
+    url = GEARLIST_URI + '/items/search?q=' + query_term
+    response = HTTParty.get(url, headers: auth_header)
+    return response.parsed_response
+  end
+
   # TODO move to Mapper
   def get_sections
     url = GEARLIST_URI + '/sections'
