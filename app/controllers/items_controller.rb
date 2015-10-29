@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
       @item = Item.new
     end
     @list_id = params[:list_id]
-    @sections = @gearlist_api.get_sections
+    @sections = GearlistMapper.map_sections(@gearlist_api)
     render :new
   end
 
@@ -43,7 +43,7 @@ class ItemsController < ApplicationController
       redirect_to root_path
     else
       item_info = @gearlist_api.get_item_details(params[:id])
-      @sections = @gearlist_api.get_sections
+      @sections = GearlistMapper.map_sections
       @item = Item.new(
         name:       item_info['name'],
         category:   item_info['category'],
@@ -92,7 +92,7 @@ class ItemsController < ApplicationController
 
   def search
     @items = @gearlist_api.search_items(params[:search])
-    
+
     if @items.length == 0
       flash[:errors] = ApplicationController::MESSAGES[:items_search_failure]
       redirect_to new_list_item_path(params[:list_id])

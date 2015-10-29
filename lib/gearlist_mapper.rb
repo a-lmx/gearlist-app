@@ -41,6 +41,11 @@ class GearlistMapper
     return lists
   end
 
+  def self.map_sections(api)
+    sections = api.get_sections
+    sections.map { |section| [section['name'], section['name']] }
+  end
+
   private
 
   def self.weight_subtotal(section)

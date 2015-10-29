@@ -79,11 +79,9 @@ class GearlistApi
     return response.parsed_response
   end
 
-  # TODO move to Mapper
   def get_sections
     url = GEARLIST_URI + '/sections'
     response = HTTParty.get(url, headers: auth_header)
-    section_objects = response.parsed_response
-    section_objects.map { |section| [section['name'], section['name']] }
+    response.parsed_response
   end
 end
