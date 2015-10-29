@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   def new
     if params[:item_id]
-      item_info = get_raw_item_details(params[:item_id])
+      item_info = @gearlist_api.get_raw_item_details(params[:item_id])
       @item = Item.new(
         name:       item_info['name'],
         category:   item_info['category'],
@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
       @item = Item.new
     end
     @list_id = params[:list_id]
-    @sections = get_sections
+    @sections = @gearlist_api.get_sections
     render :new
   end
 
@@ -51,8 +51,8 @@ class ItemsController < ApplicationController
       flash[:errors] = ApplicationController::MESSAGES[:not_yo_list]
       redirect_to root_path
     else
-      item_info = get_item_details(params[:id])
-      @sections = get_sections
+      item_info = @gearlist_api.get_item_details(params[:id])
+      @sections = @gearlist_api.get_sections
       @item = Item.new(
         name:       item_info['name'],
         category:   item_info['category'],
@@ -128,25 +128,6 @@ class ItemsController < ApplicationController
   end
 
   private
-
-  def get_item_details(item_id)
-    url = ApplicationController::BASE_URI + '/items/' + item_id.to_s
-    response = HTTParty.get(url, headers: auth_header)
-    return response.parsed_response
-  end
-
-  def get_raw_item_details(item_id)
-    url = ApplicationController::BASE_URI + '/items/raw/' + item_id.to_s
-    response = HTTParty.get(url, headers: auth_header)
-    return response.parsed_response
-  end
-
-  def get_sections
-    url = ApplicationController::BASE_URI + '/sections'
-    response = HTTParty.get(url, headers: auth_header)
-    section_objects = response.parsed_response
-    section_objects.map { |section| [section['name'], section['name']] }
-  end
 
   def oz_to_gms(weight)
     (weight.to_f * 28.3495).to_i
