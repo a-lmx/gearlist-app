@@ -35,13 +35,7 @@ class ItemsController < ApplicationController
       body: body_contents,
       headers: auth_header
     )
-    # contents = response.parsed_response
 
-    # if contents["success"]
-    #   flash message yay
-    # else
-    #   flash message wah
-    # end
     redirect_to list_path(list_id)
   end
 
@@ -83,13 +77,7 @@ class ItemsController < ApplicationController
       body: body_contents,
       headers: auth_header
     )
-    # contents = response.parsed_response
 
-    # if contents["success"]
-    #   flash message yay
-    # else
-    #   flash message wah
-    # end
     redirect_to list_path(params[:list_id])
   end
 
