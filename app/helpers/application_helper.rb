@@ -10,4 +10,8 @@ module ApplicationHelper
   def search?
     params[:action] == 'search'
   end
+
+  def gms_to_oz(gms)
+    number_with_precision((gms * 0.035274), precision: 2)
+  end
 end
