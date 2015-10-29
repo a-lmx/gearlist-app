@@ -1,3 +1,5 @@
+require 'httparty'
+
 class GearlistApi
   attr_accessor :auth_header
 
@@ -37,8 +39,8 @@ class GearlistApi
     return response.parsed_response
   end
 
-  def lists(url_param)
-    url = GEARLIST_URI + url_param
+  def lists(url_snippet)
+    url = GEARLIST_URI + url_snippet
     response = HTTParty.get(url, headers: auth_header)
     response.parsed_response
   end
@@ -84,5 +86,4 @@ class GearlistApi
     response = HTTParty.get(url, headers: auth_header)
     response.parsed_response
   end
-
 end
