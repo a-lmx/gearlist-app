@@ -13,6 +13,12 @@ class GearlistApi
     }
   end
 
+  def post(url_snippet, body)
+    url = GEARLIST_URI + url_snippet
+    response = HTTParty.post(url, body: body, headers: auth_header)
+    return response.parsed_response
+  end
+
   def get_user_lists(user_id)
     url = GEARLIST_URI + '/users/' + user_id.to_s + '/lists'
     response = HTTParty.get(url, headers: auth_header)

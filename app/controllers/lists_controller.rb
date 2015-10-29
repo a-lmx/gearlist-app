@@ -24,14 +24,13 @@ class ListsController < ApplicationController
   end
 
   def create
-    url = ApplicationController::BASE_URI + '/lists'
+    url = '/lists'
+    body = { list: list_params }
 
-    body_contents = { list: list_params }
-    response = HTTParty.post(url, body: body_contents, headers: auth_header)
-    contents = response.parsed_response
+    response = @gearlist_api.post(url, body)
 
-    if contents['success']
-      list_id = contents['list_id']
+    if response['success']
+      list_id = response['list_id']
       redirect_to list_path(list_id)
     else
       redirect_to new_list_path
