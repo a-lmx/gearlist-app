@@ -28,7 +28,7 @@
           <th>Name</th>
           <th>Quantity</th>
           <th class='text-right'>Weight (oz.)</th>
-          <% if show? %>
+          <% if authorized? && show? %>
             <th class='text-center'>Edit</th>
             <th class='text-center'>Remove</th>
           <% end %>
@@ -62,7 +62,7 @@
           <th>Subtotal for <%= section['name'].capitalize %>:</th>
           <td></td>
           <th class='text-right'><%= gms_to_lbs_oz(section[:subtotal]) %></th>
-          <% if show? %>
+          <% if authorized? && show? %>
             <th></th>
             <th></th>
           <% end %>
@@ -75,7 +75,7 @@
           <th>Total Weight:</th>
           <td></td>
           <th class='text-right'><%= gms_to_lbs_oz(list[:total_weight]) %></th>
-          <% if show? %>
+          <% if authorized? && show? %>
             <th></th>
             <th></th>
           <% end %>
