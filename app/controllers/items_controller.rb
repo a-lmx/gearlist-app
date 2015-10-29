@@ -119,6 +119,12 @@ class ItemsController < ApplicationController
     response = HTTParty.get(url, headers: auth_header)
 
     @items = response.parsed_response
+    if @items.length == 0
+      flash[:errors] = ApplicationController::MESSAGES[:items_search_failure]
+      redirect_to new_list_item_path(params[:list_id])
+    else
+      render :search
+    end
   end
 
   private
