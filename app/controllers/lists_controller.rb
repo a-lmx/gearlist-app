@@ -56,18 +56,13 @@ class ListsController < ApplicationController
   end
 
   def update
-    url = ApplicationController::BASE_URI + '/lists/' + list_params[:id]
+    url = '/lists/' + list_params[:id]
+    body = { list: list_params }
+    
+    response = @gearlist_api.put(url, body)
 
-    body_contents = { list: list_params }
-    response = HTTParty.put(
-      url, 
-      body: body_contents, 
-      headers: auth_header
-    )
-    contents = response.parsed_response
-
-    if contents['success']
-      list_id = contents['list_id']
+    if response['success']
+      list_id = response['list_id']
       redirect_to list_path(list_id)
     else
       render :edit
