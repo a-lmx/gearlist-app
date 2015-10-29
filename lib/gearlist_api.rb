@@ -41,4 +41,25 @@ class GearlistApi
     response = HTTParty.get(url, headers: auth_header)
     return response.parsed_response
   end
+
+
+  def get_item_details(item_id)
+    url = GEARLIST_URI + '/items/' + item_id.to_s
+    response = HTTParty.get(url, headers: auth_header)
+    return response.parsed_response
+  end
+
+  def get_raw_item_details(item_id)
+    url = GEARLIST_URI + '/items/raw/' + item_id.to_s
+    response = HTTParty.get(url, headers: auth_header)
+    return response.parsed_response
+  end
+
+  # TODO move to Mapper
+  def get_sections
+    url = GEARLIST_URI + '/sections'
+    response = HTTParty.get(url, headers: auth_header)
+    section_objects = response.parsed_response
+    section_objects.map { |section| [section['name'], section['name']] }
+  end
 end
