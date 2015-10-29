@@ -2,7 +2,7 @@ class GearlistApi
   attr_accessor :auth_header
 
   if Rails.env.production?
-    GEARLIST_URI = 'http://gearlist-api-prod.elasticbeanstalk.com/api/v1'
+    GEARLIST_URI = 'https://www.kitgearlist.com/api/v1'
   else
     GEARLIST_URI = 'http://localhost:3000/api/v1'
   end
