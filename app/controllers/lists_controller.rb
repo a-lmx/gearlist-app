@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
   def index
+    flash[:errors] = nil
     if params[:search]
       search_url = build_search_url(params[:search])
       @lists = get_lists(search_url)
