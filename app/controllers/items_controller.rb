@@ -17,24 +17,21 @@ class ItemsController < ApplicationController
   end
 
   def create
-    list_id = params["list_id"]
-    item = params["item"]
-    url = ApplicationController::BASE_URI + '/lists/'+ list_id + '/items'
-    body_contents = {
+    list_id = params['list_id']
+    item = params['item']
+    url = '/lists/'+ list_id + '/items'
+    body = {
       item: {
-        name: item["name"],
-        weight: oz_to_gms(item["weight"]),
-        category: item["category"]
+        name: item['name'],
+        weight: oz_to_gms(item['weight']),
+        category: item['category']
       },
-      section: item["section"],
-      quantity: item["quantity"],
+      section: item['section'],
+      quantity: item['quantity'],
       list_id: list_id
     }
-    response = HTTParty.post(
-      url, 
-      body: body_contents,
-      headers: auth_header
-    )
+
+    response = @gearlist_api.post(url, body)
 
     redirect_to list_path(list_id)
   end
@@ -60,9 +57,8 @@ class ItemsController < ApplicationController
   end
 
   def update
-    url = ApplicationController::BASE_URI + '/items/' + item_params[:id]
-
-    body_contents = {
+    url = '/items/' + item_params[:id]
+    body = {
       item: {
         id: item_params['id'],
         name: item_params['name'],
@@ -72,11 +68,8 @@ class ItemsController < ApplicationController
       section: item_params['section'],
       quantity: item_params['quantity'],
     }
-    response = HTTParty.put(
-      url, 
-      body: body_contents,
-      headers: auth_header
-    )
+
+    response = @gearlist_api.put(url, body)
 
     redirect_to list_path(params[:list_id])
   end
@@ -87,16 +80,11 @@ class ItemsController < ApplicationController
       flash[:errors] = ApplicationController::MESSAGES[:not_yo_list]
     else
       item_id = params[:id]
-      url = ApplicationController::BASE_URI + '/items/' + params[:id]
+      url = '/items/' + params[:id]
 
-      response = HTTParty.delete(
-        url,
-        body: { list_section_item_id: item_id },
-        headers: auth_header
-      )
+      response = @gearlist_api.delete(url)
 
-      contents = response.parsed_response
-      flash[:errors] = contents[:failure] if contents[:failure]  
+      flash[:errors] = response[:failure] if response[:failure]  
     end
 
     redirect_to list_path(params[:list_id])
