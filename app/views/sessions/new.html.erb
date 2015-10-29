@@ -1,7 +1,7 @@
 <html>
   <head>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-    <script src="https://apis.google.com/js/api:client.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <script src="//apis.google.com/js/api:client.js"></script>
     <script type="text/javascript">
       var googleUser = {};
 
@@ -9,7 +9,7 @@
       var baseUri;
 
       if (railsEnv === 'production') {
-        baseUri = 'http://www.kitgearlist.com' + '/api/v1';
+        baseUri = 'http://gearlist-api-prod.elasticbeanstalk.com' + '/api/v1';
       }
       else {
         baseUri = 'http://localhost:3000' + '/api/v1';
