@@ -3,18 +3,18 @@ class ListsController < ApplicationController
     flash[:errors] = nil
     if params[:search]
       search_url = build_search_url(params[:search])
-      @lists = get_lists(search_url)
+      @lists = GearlistMapper.get_lists(search_url, @gearlist_api)
       if @lists == nil || @lists.length == 0
         flash[:errors] = "Sorry, we can't find any lists relating to '#{params[:search]}', so here are all the lists."
-        @lists = get_lists('/lists')
+        @lists = GearlistMapper.get_lists('/lists', @gearlist_api)
       end
     else
-      @lists = get_lists('/lists')
+      @lists = GearlistMapper.get_lists('/lists', @gearlist_api)
     end
   end
 
   def show
-    @list = build_list(params[:id])
+    @list = GearlistMapper.build_list(params[:id], @gearlist_api)
     @list_owner_id = @list[:user_id].to_s
   end
 
@@ -100,77 +100,77 @@ class ListsController < ApplicationController
 
   private
 
-  def build_list(list_id)
-    list = {}
+  # def build_list(list_id)
+  #   list = {}
 
-    details = @gearlist_api.get_list_details(list_id)
-    list[:name]        = details["name"]
-    list[:user_id]     = details["user_id"]
-    list[:description] = details["description"]
-    list[:secret]      = details["secret"]
-    list[:id]          = details['id']
-    list[:user_name]   = details['user_name']
+  #   details = @gearlist_api.get_list_details(list_id)
+  #   list[:name]        = details["name"]
+  #   list[:user_id]     = details["user_id"]
+  #   list[:description] = details["description"]
+  #   list[:secret]      = details["secret"]
+  #   list[:id]          = details['id']
+  #   list[:user_name]   = details['user_name']
 
-    list[:sections] = get_list_sections(list_id)
+  #   list[:sections] = get_list_sections(list_id)
 
-    list[:sections].each do |section|
-      section[:items] = get_section_items(section["id"])
-      section[:subtotal] = weight_subtotal(section)
-    end
+  #   list[:sections].each do |section|
+  #     section[:items] = get_section_items(section["id"])
+  #     section[:subtotal] = weight_subtotal(section)
+  #   end
 
-    list[:total_weight] = total_weight(list)
+  #   list[:total_weight] = total_weight(list)
 
-    return list
-  end
+  #   return list
+  # end
 
-  def get_lists(url_param)
-    list_ids = []
-    lists = []
+  # def get_lists(url_param)
+  #   list_ids = []
+  #   lists = []
 
-    # url = ApplicationController::BASE_URI + '/lists'
-    url = ApplicationController::BASE_URI + url_param
-    retrieved_lists = HTTParty.get(url, headers: auth_header).parsed_response
+  #   # url = ApplicationController::BASE_URI + '/lists'
+  #   url = ApplicationController::BASE_URI + url_param
+  #   retrieved_lists = HTTParty.get(url, headers: auth_header).parsed_response
 
-    retrieved_lists.each do |list|
-      list_ids.push(list["id"])
-    end
+  #   retrieved_lists.each do |list|
+  #     list_ids.push(list["id"])
+  #   end
 
-    list_ids.each do |id|
-      lists.push(build_list(id))
-    end
+  #   list_ids.each do |id|
+  #     lists.push(build_list(id))
+  #   end
 
-    return lists
-  end
+  #   return lists
+  # end
 
-  def get_list_sections(list_id)
-    url = ApplicationController::BASE_URI + '/lists/' + list_id.to_s + '/sections'
-    response = HTTParty.get(url, headers: auth_header)
-    return response.parsed_response
-  end
+  # def get_list_sections(list_id)
+  #   url = ApplicationController::BASE_URI + '/lists/' + list_id.to_s + '/sections'
+  #   response = HTTParty.get(url, headers: auth_header)
+  #   return response.parsed_response
+  # end
 
-  def get_section_items(section_id)
-    url = ApplicationController::BASE_URI + '/list-sections/' + section_id.to_s + '/items'
-    response = HTTParty.get(url, headers: auth_header)
-    return response.parsed_response
-  end
+  # def get_section_items(section_id)
+  #   url = ApplicationController::BASE_URI + '/list-sections/' + section_id.to_s + '/items'
+  #   response = HTTParty.get(url, headers: auth_header)
+  #   return response.parsed_response
+  # end
 
-  def weight_subtotal(section)
-    sum = 0
-    section[:items].each do |item|
-      sum += (item["weight"].to_i * item["quantity"].to_i)
-    end
+  # def weight_subtotal(section)
+  #   sum = 0
+  #   section[:items].each do |item|
+  #     sum += (item["weight"].to_i * item["quantity"].to_i)
+  #   end
 
-    return sum
-  end
+  #   return sum
+  # end
 
-  def total_weight(list)
-    sum = 0
-    list[:sections].each do |section|
-      sum += section[:subtotal]
-    end
+  # def total_weight(list)
+  #   sum = 0
+  #   list[:sections].each do |section|
+  #     sum += section[:subtotal]
+  #   end
 
-    return sum
-  end
+  #   return sum
+  # end
 
   def build_search_url(query_string)
     '/lists/search?q=' + query_string
