@@ -42,7 +42,7 @@
             <td><%= item['name'] %></td>
             <td><%= item['quantity'] %></td>
             <td class='text-right'><%= gms_to_lbs_oz(item['weight']) %></td>
-            <% if show? %>
+            <% if authorized? && show? %>
               <td class='text-center'>
                 <%= link_to '/lists/' + list[:id].to_s + '/items/' + item['id'].to_s + '/edit' do %>
                   <i class='fa fa-pencil'></i>
