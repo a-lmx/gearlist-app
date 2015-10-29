@@ -24,13 +24,10 @@ class GearlistMapper
     return list
   end
 
-
   def self.get_lists(url_param, api)
     list_ids = []
     lists = []
 
-    # url = ApplicationController::BASE_URI + url_param
-    # retrieved_lists = HTTParty.get(url, headers: auth_header).parsed_response
     retrieved_lists = api.lists(url_param)
 
     retrieved_lists.each do |list|
