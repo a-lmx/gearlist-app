@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
     body_contents = {
       item: {
         name: item["name"],
-        weight: item["weight"],
+        weight: oz_to_gms(item["weight"]),
         category: item["category"]
       },
       section: item["section"],
@@ -72,7 +72,7 @@ class ItemsController < ApplicationController
       item: {
         id: item_params['id'],
         name: item_params['name'],
-        weight: item_params['weight'],
+        weight: oz_to_gms(item_params['weight']),
         category: item_params['category']
       },
       section: item_params['section'],
@@ -146,6 +146,10 @@ class ItemsController < ApplicationController
     response = HTTParty.get(url, headers: auth_header)
     section_objects = response.parsed_response
     section_objects.map { |section| [section['name'], section['name']] }
+  end
+
+  def oz_to_gms(weight)
+    (weight.to_f * 28.3495).to_i
   end
 
   def item_params
