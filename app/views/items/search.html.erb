@@ -8,11 +8,8 @@
       </div>
     </div>
   <% end %>
-  <%= submit_tag 'Continue with selected item', class: 'btn btn-default' %>
+  <%= submit_tag 'Continue with selected item', class: 'btn btn-primary' %>
+  <%= link_to '/lists/' + params[:list_id].to_s + '/items/new', class: 'btn btn-default pull-right' do %>
+    <i class='fa fa-arrow-left'></i> Back
+  <% end %>
 <% end %>
-
-<span class='pull-right'>
-<%= link_to '/lists/' + params[:list_id].to_s + '/items/new', class: 'btn btn-default' do %>
-  <i class='fa fa-arrow-left'></i> Back
-<% end %>
-</span>
