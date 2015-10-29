@@ -4,7 +4,7 @@
   <% @items.each do |item| %>
     <div class='form-group'>
       <div class='form-control'>
-        <%= radio_button_tag :item_id, item['id'] %>  <%= item['name'] + ', weight: ' + item['weight'].to_s %>
+        <%= radio_button_tag :item_id, item['id'] %>  <%= item['name'] + ', weight: ' + gms_to_oz(item['weight']).to_s + ' oz.' %>
       </div>
     </div>
   <% end %>
