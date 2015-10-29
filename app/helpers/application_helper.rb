@@ -12,6 +12,6 @@ module ApplicationHelper
   end
 
   def gms_to_oz(gms)
-    number_with_precision((gms * 0.035274), precision: 2)
+    number_with_precision((gms * 0.035274), precision: 1)
   end
 end
