@@ -27,15 +27,6 @@ class ApplicationController < ActionController::Base
     @user_lists = @gearlist_api.get_user_lists(session[:user_id])
   end
 
-  def auth_header
-    token = session[:token]
-    auth_header = {
-      "Authorization" => "Token token=\"#{token}\""
-    }
-
-    return auth_header
-  end
-
   def current_user_id
     @current_user_id = session[:user_id]
   end
