@@ -11,6 +11,10 @@ module ApplicationHelper
     params[:action] == 'search'
   end
 
+  def from_search?
+    params[:commit] == 'Continue with selected item'
+  end
+
   def gms_to_oz(gms)
     (gms * 0.035274).round(1)
   end
