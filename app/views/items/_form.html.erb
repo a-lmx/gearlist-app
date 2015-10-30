@@ -24,7 +24,11 @@
 
   <%= f.submit submit_text, class: 'btn btn-primary' %>
 
+  <%= link_to '/lists/' + params[:list_id].to_s + '/items/new', class: 'btn btn-default start-over-btn' do %>
+    <i class='fa fa-repeat'></i> Start Over
+  <% end %>
+
   <%= link_to '/lists/' + params[:list_id].to_s, class: 'btn btn-default pull-right' do %>
-    <i class='fa fa-arrow-left'></i> Back
+    <i class='fa fa-arrow-left'></i> Back to List
   <% end %>
 <% end %>
