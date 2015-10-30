@@ -23,4 +23,8 @@
   <%= f.hidden_field :id %>
 
   <%= f.submit submit_text, class: 'btn btn-primary' %>
+
+  <%= link_to '/lists/' + params[:list_id].to_s, class: 'btn btn-default pull-right' do %>
+    <i class='fa fa-arrow-left'></i> Back
+  <% end %>
 <% end %>
