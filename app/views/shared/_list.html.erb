@@ -60,8 +60,7 @@
           <td></td>
           <td></td>
           <th>Subtotal for <%= section['name'].capitalize %>:</th>
-          <td></td>
-          <th class='text-right'><%= gms_to_lbs_oz(section[:subtotal]) %></th>
+          <th colspan='2' class='text-right'><%= gms_to_lbs_oz(section[:subtotal]) %></th>
           <% if authorized? && show? %>
             <th></th>
             <th></th>
@@ -73,8 +72,7 @@
           <td></td>
           <td></td>
           <th>Total Weight:</th>
-          <td></td>
-          <th class='text-right'><%= gms_to_lbs_oz(list[:total_weight]) %></th>
+          <th colspan='2' class='text-right'><%= gms_to_lbs_oz(list[:total_weight]) %></th>
           <% if authorized? && show? %>
             <th></th>
             <th></th>
