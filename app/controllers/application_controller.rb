@@ -9,17 +9,13 @@ class ApplicationController < ActionController::Base
 
   before_action :initialize_api, :user_lists, :current_user_id, :require_signin
 
-  # if Rails.env.production?
-  #   BASE_URI = 'http://gearlist-api-prod.elasticbeanstalk.com' + '/api/v1'
-  # else
-  #   BASE_URI = 'http://localhost:3000/api/v1'
-  # end
-
   MESSAGES = {
     not_yo_list_edit: "You cannot edit someone else's Gear List.",
     not_yo_list_delete: "You cannot delete someone else's Gear List.",
     items_search_failure: "We didn't find any matching items. Please enter the item data manually."
   }
+
+  TITLE = "Penguin Gear Lists"
 
   private
 
