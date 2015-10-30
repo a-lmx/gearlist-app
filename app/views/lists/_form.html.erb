@@ -19,4 +19,8 @@
   <%= f.hidden_field :id, value: params[:id] %>
 
   <%= f.submit submit_text, class: 'btn btn-primary' %>
+
+  <%= link_to root_path, class: 'btn btn-default pull-right' do %>
+    <i class='fa fa-arrow-left'></i> Back
+  <% end %>
 <% end %>
