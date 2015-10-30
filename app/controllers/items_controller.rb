@@ -43,7 +43,7 @@ class ItemsController < ApplicationController
       redirect_to root_path
     else
       item_info = @gearlist_api.get_item_details(params[:id])
-      @sections = GearlistMapper.map_sections
+      @sections = GearlistMapper.map_sections(@gearlist_api)
       @item = Item.new(
         name:       item_info['name'],
         category:   item_info['category'],
