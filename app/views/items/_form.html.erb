@@ -1,23 +1,23 @@
 <%= form_for @item, url: url, method: method, role: 'form', class: 'form' do |f| %>
   <div class="form-group">
     <%= f.label :section, 'Section:' %>
-    <%= f.select(:section, @sections, { include_blank: 'pick a section...' }, { class: 'form-control' }) %>
+    <%= f.select(:section, @sections, { include_blank: 'pick a section...' }, { class: 'form-control', required: true }) %>
   </div>
   <div class="form-group">
     <%= f.label :category, 'Category:' %>
-    <%= f.text_field :category, placeholder: "backpack, sleeping bag, or knife...", class: 'form-control' %>
+    <%= f.text_field :category, placeholder: "backpack, sleeping bag, or knife...", class: 'form-control', required: true %>
   </div>
   <div class="form-group">
     <%= f.label :name, 'Item:' %>
-    <%= f.text_field :name, placeholder: "eg. ULA Circuit pack, small w/ s-shaped straps", class: 'form-control' %>
+    <%= f.text_field :name, placeholder: "eg. ULA Circuit pack, small w/ s-shaped straps", class: 'form-control', required: true %>
   </div>
   <div class="form-group">
     <%= f.label :quantity, 'Quantity:' %>
-    <%= f.number_field :quantity, min: 0, class: 'form-control' %>
+    <%= f.number_field :quantity, min: 0, class: 'form-control', required: true %>
   </div>
   <div class="form-group">
     <%= f.label :weight, 'Weight (oz.):' %>
-    <%= f.number_field :weight, min: 0, step: 0.1, class: 'form-control' %>
+    <%= f.number_field :weight, min: 0, step: 0.1, class: 'form-control', required: true %>
   </div>
 
   <%= f.hidden_field :id %>

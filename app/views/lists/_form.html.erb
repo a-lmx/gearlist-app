@@ -1,11 +1,11 @@
 <%= form_for @list, url: url, method: method, role: 'form', class: 'form' do |f| %>
   <div class="form-group">
     <%= f.label :name, 'List Name:' %>
-    <%= f.text_field :name, class: 'form-control' %>
+    <%= f.text_field :name, class: 'form-control', required: true %>
   </div>
   <div class="form-group">
     <%= f.label :description, 'Description:' %>
-    <%= f.text_area :description, class: 'form-control' %>
+    <%= f.text_area :description, class: 'form-control', required: true %>
   </div>
   <div class="form-group">
     <%= f.radio_button :secret, false, checked: true %>
